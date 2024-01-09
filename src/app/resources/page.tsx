@@ -1,3 +1,4 @@
+'use client'
 import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
 import TextField from '@/components/Input/TextField'
 import Image from 'next/image'

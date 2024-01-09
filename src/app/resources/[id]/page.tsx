@@ -1,11 +1,7 @@
-export const dynamic = 'force-static'
-export const dynamicParams = false
-export function generateStaticParams() {
-  return [{ id: '1' }, { id: '2' }, { id: '3' }]
-}
-import CheckBox from '@/components/Input/CheckBox'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import React from 'react'
+const CheckBox = dynamic(() => import('@/components/Input/CheckBox'))
 
 const Resource = ({ params }: { params: { id: string } }) => {
   const { id } = params

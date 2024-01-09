@@ -18,9 +18,9 @@ const LoginForm: React.FC<FormProps> = (props) => {
           <div className="text-[#1030EF] cursor-pointer" onClick={() => setAuth('forgotpassword')}>Forgot password?</div>
         </div>
       </div>
-      <div className="flex flex-row gap-4">
-        <Button text="Submit" dark />
-        <Button text="Register" onClick={() => setAuth('register')} />
+      <div className="flex flex-col min-[425px]:flex-row gap-4">
+        <Button text="Submit" dark className='w-full min-[425px]:w-auto' />
+        <Button text="Register" onClick={() => setAuth('register')} className='w-full min-[425px]:w-auto' />
       </div>
     </div>
   )

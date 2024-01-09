@@ -22,9 +22,13 @@ const ContactDetailWithForm: React.FC<ContactDetailWithFormProps> = (props) => {
 
   return (
     <div id={id} className="py-7 md:py-14">
-      {label ? <div className="text-center text-xl md:text-4xl text-black font-bold mb-11">
-        Contact us
-      </div> : <></>}
+      {label ? (
+        <div className="text-center text-xl md:text-4xl text-black font-bold mb-11">
+          Contact us
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-8">
         <div className='w-full min-h-[491px] h-[569px] lg:h-auto bg-[url("/images/cus_jou_block_m_1.svg")] md:bg-[url("/images/cus_jou_block_d_1.svg")] lg:bg-[url("/images/cus_jou_block_m_1.svg")] xl:bg-[url("/images/contact_bg.svg")] bg-cover flex flex-col gap-6 rounded-3xl p-6 bg-no-repeat'>
           <div className="bg-white w-full p-6 flex flex-col gap-6 rounded-2xl">
@@ -33,21 +37,21 @@ const ContactDetailWithForm: React.FC<ContactDetailWithFormProps> = (props) => {
             </div>
             <div className="flex flex-col gap-2">
               {options.map((option, i) => (
-                <div key={i} className="flex flex-row gap-3 items-start">
+                <div key={i} className="flex flex-col min-[425px]:flex-row gap-3 items-start">
+                  <Image
+                    src="/images/checkbox.svg"
+                    width={24}
+                    height={24}
+                    alt="checkbox"
+                    className="w-6 h-6"
+                  />
                   <div className="flex flex-row gap-2">
-                    <Image
-                      src="/images/checkbox.svg"
-                      width={24}
-                      height={24}
-                      alt="checkbox"
-                      className="w-6 h-6"
-                    />
                     <div className="text-sm md:text-base text-grey">
                       {option.title}
                     </div>
-                  </div>
-                  <div className="text-sm md:text-base text-grey">
-                    : {option.value}
+                    <div className="text-sm md:text-base text-grey">
+                      : {option.value}
+                    </div>
                   </div>
                 </div>
               ))}

@@ -1,3 +1,4 @@
+'use client'
 import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
 import dynamic from 'next/dynamic'
 const HeroSection = dynamic(() => import('@/components/Blocks/home/HeroSection'))

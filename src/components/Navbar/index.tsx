@@ -9,7 +9,7 @@ const Button = dynamic(() => import('../Buttons/Button'))
 const Navbar = () => {
   const router = useRouter()
   return (
-    <nav className='py-11 md:py-12 flex flex-col xl:flex-row gap-9 xl:gap-0 md:items-center justify-between'>
+    <nav className='py-11 md:py-12 flex flex-col xl:flex-row gap-9 xl:gap-0 justify-between'>
         <div className='flex flex-row gap-6 lg:gap-12 items-center'>
             <BrandLogo />
             <Menus />

@@ -72,7 +72,7 @@ const Menus = () => {
   }
 
   return (
-    <div className="hidden lg:flex flex-row gap-4 lg:gap-8">
+    <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
       {menuList.map((menu) => (
         <div
           key={menu.id}

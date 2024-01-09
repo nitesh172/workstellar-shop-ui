@@ -77,8 +77,8 @@ const SubscriptionSection = () => {
   return (
     <div id="Price" className="py-7 md:py-14">
       <div className='rounded-3xl flex flex-col items-start lg:items-center gap-4 xl:flex-row xl:gap-16 bg-[url("/images/subscription_bg_m.svg")] md:bg-[url("/images/subscription_bg_d.svg")] bg-no-repeat bg-cover py-8 px-6 md:p-9'>
-        <div className="p-0 md:p-14">
-          <div className="flex flex-col gap-5 rounded-3xl justify-center items-center bg-white py-16 md:py-24 px-20 md:px-[73px]">
+        <div className="p-0 md:p-14 w-full lg:w-auto">
+          <div className="flex flex-col gap-5 rounded-3xl justify-center items-center bg-white py-16 md:py-24 px-8 min-[425px]:px-20 md:px-[73px]">
             <div className="text-xl md:text-5xl font-bold">Subscription</div>
             <div className="flex flex-col items-center">
               <div className="text-5xl md:text-8xl font-bold">$20.12</div>

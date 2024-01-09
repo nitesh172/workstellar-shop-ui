@@ -11,9 +11,9 @@ const RegisterForm: React.FC<FormProps> = (props) => {
       <div className="flex flex-col gap-6">
         <TextField label="Enter your email ID" placeholder="Johncooper@gmail.com" />
       </div>
-      <div className="flex flex-row gap-4">
-        <Button text="Submit" dark />
-        <Button text="Login" onClick={() => setAuth('login')} />
+      <div className="flex flex-col min-[425px]flex-row gap-4">
+        <Button text="Submit" dark className='w-full min-[425px]:w-auto' />
+        <Button text="Login" onClick={() => setAuth('login')} className='w-full min-[425px]:w-auto' />
       </div>
     </div>
   )
