@@ -1,0 +1,13 @@
+[build]
+command = "npm run build"
+publish = "out"
+
+[[redirects]]
+from = "/"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/:resources/:id"
+to = "/[resources]/[id].html"
+status = 200
