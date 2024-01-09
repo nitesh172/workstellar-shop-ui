@@ -1,10 +1,11 @@
 import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
-import Button from '@/components/Buttons/Button'
 import TextField from '@/components/Input/TextField'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const Resources = () => {
+  const router = useRouter()
   const persons = [
     {
       id: 0,
@@ -35,26 +36,42 @@ const Resources = () => {
   return (
     <div className="py-7 md:py-14">
       <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
-      <div className='flex flex-col lg:flex-row justify-between mb-9'>
-        <TextField  label='Search' placeholder='Search' className='w-80' />
-        <div className='hidden lg:flex flex-row gap-10 items-center'>
-            <div className='flex flex-row gap-2.5 items-center'>
-                <div className='text-sm'>Work type</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Hourly</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Weekly</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Mouthly</div>
+      <div className="flex flex-col lg:flex-row justify-between mb-9">
+        <TextField label="Search" placeholder="Search" className="w-80" />
+        <div className="hidden lg:flex flex-row gap-10 items-center">
+          <div className="flex flex-row gap-2.5 items-center">
+            <div className="text-sm">Work type</div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Hourly
             </div>
-            <div className='flex flex-row gap-2.5 items-center'>
-                <div className='text-sm'>Level</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>High</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Medium</div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Weekly
             </div>
-            <div className='flex flex-row gap-2.5 items-center'>
-                <div className='text-sm'>Size</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Large</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Medium</div>
-                <div className='rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4'>Small</div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Mouthly
             </div>
+          </div>
+          <div className="flex flex-row gap-2.5 items-center">
+            <div className="text-sm">Level</div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              High
+            </div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Medium
+            </div>
+          </div>
+          <div className="flex flex-row gap-2.5 items-center">
+            <div className="text-sm">Size</div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Large
+            </div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Medium
+            </div>
+            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+              Small
+            </div>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 min-[425px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-7">
@@ -83,7 +100,14 @@ const Resources = () => {
                   {person.role}
                 </div>
               </div>
-              <Image src="/images/redirect.svg" alt='redirect' className='absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6' width={24} height={24} />
+              <Image
+                src="/images/redirect.svg"
+                alt="redirect"
+                onClick={() => router.push(`/resources/1`)}
+                className="cursor-pointer absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6"
+                width={24}
+                height={24}
+              />
             </div>
           </div>
         ))}
