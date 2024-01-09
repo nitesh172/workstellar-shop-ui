@@ -112,7 +112,7 @@ const SubscriptionSection = () => {
             <div className="text-sm font-bold mb-4">Select Resources</div>
             <div className="max-h-64 flex flex-col gap-2 overflow-scroll">
               {list.map((person, index) => (
-                <CheckBox id={`checkbox-${index}`} label={person.name} value={person.value} />
+                <CheckBox key={index} id={`checkbox-${index}`} label={person.name} value={person.value} />
               ))}
             </div>
           </div>

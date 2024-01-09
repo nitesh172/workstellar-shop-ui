@@ -1,8 +1,15 @@
+export const dynamic = 'force-static'
+export const dynamicParams = false
+export function generateStaticParams() {
+  return [{ id: '1' }, { id: '2' }, { id: '3' }]
+}
 import CheckBox from '@/components/Input/CheckBox'
 import Image from 'next/image'
 import React from 'react'
 
-const Resource = () => {
+const Resource = ({ params }: { params: { id: string } }) => {
+  const { id } = params
+  
   return (
     <div className="py-7 md:py-14">
       <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
@@ -36,10 +43,19 @@ const Resource = () => {
         <div className="flex flex-col gap-4">
           <div className="text-2xl md:text-4xl font-bold">Developer</div>
           <div className="text-lg md:text-2xl">Lorem ipsum doret dexit</div>
-          <div className='flex flex-col gap-3'>
-              <CheckBox id='checkn' label='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to' />
-              <CheckBox id='checkn' label='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to' />
-              <CheckBox id='checkn' label='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to' />
+          <div className="flex flex-col gap-3">
+            <CheckBox
+              id="checkn"
+              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
+            />
+            <CheckBox
+              id="checkn"
+              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
+            />
+            <CheckBox
+              id="checkn"
+              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
+            />
           </div>
         </div>
       </div>
