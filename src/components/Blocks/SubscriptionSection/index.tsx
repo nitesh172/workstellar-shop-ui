@@ -5,10 +5,48 @@ import CheckBox from '@/components/Input/CheckBox'
 import React from 'react'
 
 const SubscriptionSection = () => {
-  let option = [
+  let workType = [
     {
       name: 'Hourly',
-      id: 11,
+      id: 1,
+    },
+    {
+      name: 'Weekly',
+      id: 2,
+    },
+    {
+      name: 'Monthly',
+      id: 3,
+    },
+  ]
+
+  let level = [
+    {
+      name: 'Entry level package',
+      id: 1,
+    },
+    {
+      name: 'Mid level package',
+      id: 2,
+    },
+    {
+      name: 'Senior level package',
+      id: 3,
+    },
+  ]
+
+  let size = [
+    {
+      name: 'Small',
+      id: 1,
+    },
+    {
+      name: 'Medium',
+      id: 2,
+    },
+    {
+      name: 'Big',
+      id: 3,
     },
   ]
 
@@ -91,20 +129,20 @@ const SubscriptionSection = () => {
           <DropDown
             availableOptionKey="name"
             label="Select work type"
-            availableOptions={option}
+            availableOptions={workType}
             setOption={() => {}}
           />
           <div className="flex flex-col md:flex-row gap-4 md:gap-5">
             <DropDown
               availableOptionKey="name"
               label="Resources level"
-              availableOptions={option}
+              availableOptions={level}
               setOption={() => {}}
             />
             <DropDown
               availableOptionKey="name"
               label="Resources size"
-              availableOptions={option}
+              availableOptions={size}
               setOption={() => {}}
             />
           </div>

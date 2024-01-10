@@ -23,3 +23,58 @@
   border-radius: 10px;
   /* border: 3px solid var(--primary); */
 }
+
+/* Hamburger Menu */
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  position: absolute;
+  height: 2px;
+  width: 24px;
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  background: black;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+
+.hamburger-top {
+  width: 15px;
+}
+
+.hamburger-middle {
+  transform: translateY(7px);
+  width: 20px;
+}
+
+.hamburger-bottom {
+  transform: translateY(14px);
+  width: 10px;
+}
+
+.open {
+  transform: rotate(90deg);
+}
+
+.open .hamburger-top {
+  transform: rotate(45deg) translateY(6px) translateX(6px);
+  width: 24px;
+}
+
+.open .hamburger-middle {
+  display: none;
+}
+
+.open .hamburger-bottom {
+  transform: rotate(-45deg) translateY(6px) translateX(-6px);
+  width: 24px;
+}

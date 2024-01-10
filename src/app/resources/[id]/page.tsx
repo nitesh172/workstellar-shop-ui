@@ -10,7 +10,7 @@ const Resource = ({ params }: { params: { id: string } }) => {
     <div className="py-7 md:py-14">
       <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
       <div className="py-5 flex flex-col items-center lg:flex-row gap-8 lg:gap-[5%]">
-        <div className="rounded-xl w-full md:w-fit border p-3 md:p-5 flex gap-3 md:gap-6 flex-col">
+        <div className="rounded-xl relative w-full md:w-fit border p-3 md:p-5 flex gap-3 md:gap-6 flex-col">
           <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
             <Image
               src="/images/person_1.svg"

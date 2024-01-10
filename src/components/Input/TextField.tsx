@@ -7,7 +7,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
     <div className={`relative bg-white rounded-lg border ${className ? className : ''}`}>
       <label
         htmlFor=""
-        className="absolute text-xs font-semibold z-10 left-4 -top-[22%] bg-white p-1"
+        className="absolute text-xs font-semibold z-10 left-3 -top-[22%] bg-white p-1"
       >
         {label}
       </label>

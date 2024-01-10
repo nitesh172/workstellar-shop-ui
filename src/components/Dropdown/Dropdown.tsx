@@ -16,15 +16,14 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
     onBlur,
     onScrollEnd,
     isDisabled,
-    iconEnabled,
     name,
+    primary,
   } = props
 
   const [showDropDownOptions, setShowDropDownOptions] = useState(false)
 
   const classes = () => {
-    if (!isInvalid)
-      return `placeholder:text-[#5E605E] text-[#5E605E]`
+    if (!isInvalid) return `placeholder:text-[#5E605E] text-[#5E605E]`
     return ` placeholder:text-[#FF0000] text-[#FF0000]`
   }
 
@@ -50,18 +49,26 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
         onBlur={onBlur}
         className={`rounded-2xl bg-white ${
           isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
-        } ${
+        } relative flex justify-between items-center p-5 ${
           showDropDownOptions
             ? 'rounded-bl-none rounded-br-none'
             : 'rounded-br-2xl rounded-bl-2xl'
-        } relative flex justify-between items-center p-5 ${classes()}`}
+        } ${primary ? `border rounded-lg rounded-br-lg rounded-bl-lg` : ''} ${classes()}`}
         onClick={() => {
           !isDisabled && setShowDropDownOptions(!showDropDownOptions)
         }}
       >
         <div className="truncate text-base flex flex-col gap-1">
-          <div className='text-sm font-bold'>{label}</div>
-          <div className='text-sm'>
+          <div
+            className={
+              primary
+                ? 'absolute text-xs font-semibold whitespace-break-spaces text-black z-10 left-3 -top-[22%] bg-white p-1'
+                : 'text-sm font-bold'
+            }
+          >
+            {label}
+          </div>
+          <div className="text-sm">
             {newOption && availableOptionKey && Object.keys(newOption)
               ? newOption[availableOptionKey]
               : newOption || 'Select'}
@@ -91,7 +98,7 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
             }}
             className={`flex shadow-2xl flex-col absolute z-20 overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] top-full overflow-y-scroll max-h-52 rounded-bl-2xl rounded-br-2xl ${
               availableOptions ? `h-fit` : `h-16`
-            } w-full right-0`}
+            } ${primary ? 'border border-t-0' : 'border-none'} w-full right-0`}
           >
             {!!availableOptions?.length ? (
               availableOptions.map((availableOption: any, index) => (

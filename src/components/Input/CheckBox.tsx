@@ -13,8 +13,8 @@ const CheckBox: React.FC<CheckBoxProps> = (props) => {
   }
 
   return (
-    <div className="flex flex-row items-start gap-2">
-      <label htmlFor={id}>
+    <div>
+      <label htmlFor={id} className="flex flex-row items-center gap-2">
         {!checked ? (
           <svg
             width="20"
@@ -42,16 +42,16 @@ const CheckBox: React.FC<CheckBoxProps> = (props) => {
             />
           </svg>
         )}
+        <input
+          type="checkbox"
+          onChange={handleOnChange}
+          name={name}
+          id={id}
+          checked={checked}
+          className="hidden peer"
+        />
+        <span className="text-grey">{label}</span>
       </label>
-      <input
-        type="checkbox"
-        onChange={handleOnChange}
-        name={name}
-        id={id}
-        checked={checked}
-        className="hidden peer"
-      />
-      <span>{label}</span>
     </div>
   )
 }

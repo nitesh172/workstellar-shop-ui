@@ -1,11 +1,14 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import VideoFrame from './VideoFrame'
+import PopupEncloser from '@/components/PopupEncloser/PopupEncloser'
+import ScheduleMeeting from '../ScheduleMeeting'
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [mPopup, setMPopup] = useState<boolean>(false)
 
   useEffect(() => {
     if (videoRef && videoRef.current) {
@@ -14,6 +17,8 @@ const HeroSection = () => {
       })
     }
   }, [videoRef])
+
+  const handlePopup = () => setMPopup(!mPopup)
 
   return (
     <div className="flex flex-col xl:flex-row gap-8 md:gap-16 lg:gap-20 xl:gap-14 pb-7 md:pb-14">
@@ -29,9 +34,12 @@ const HeroSection = () => {
           Empower your digital vision with top-tier developers and designers.
           Elevate your online presence effortlessly.
         </div>
-        <Button text="Let’s talk" dark />
+        <Button text="Let’s talk" dark onClick={handlePopup}  />
       </div>
       <VideoFrame className="w-full xl:w-[87%] flex flex-col gap-0.5" />
+      <PopupEncloser show={mPopup} close={handlePopup}>
+        <ScheduleMeeting />
+      </PopupEncloser>
     </div>
   )
 }

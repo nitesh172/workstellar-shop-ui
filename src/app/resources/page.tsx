@@ -3,10 +3,11 @@ import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
 import TextField from '@/components/Input/TextField'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Resources = () => {
   const router = useRouter()
+  const [filter, setFilter] = useState<boolean>(false)
   const persons = [
     {
       id: 0,
@@ -35,42 +36,70 @@ const Resources = () => {
   ]
 
   return (
-    <div className="py-7 md:py-14">
-      <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
-      <div className="flex flex-col lg:flex-row justify-between mb-9">
-        <TextField label="Search" placeholder="Search" className="w-80" />
-        <div className="hidden lg:flex flex-row gap-10 items-center">
-          <div className="flex flex-row gap-2.5 items-center">
-            <div className="text-sm">Work type</div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Hourly
-            </div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Weekly
-            </div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Mouthly
+    <div className="py-7 md:py-14 relative" onClick={() => setFilter(false)}>
+      <div className="flex flex-row justify-between items-centerf">
+        <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
+        <Image
+          src="/images/filter.svg"
+          onClick={(e) => {
+            e.stopPropagation()
+            setFilter(!filter)
+          }}
+          className="flex xl:hidden w-6 h-6 cursor-pointer"
+          width={24}
+          height={24}
+          alt=""
+        />
+      </div>
+      <div className="flex flex-col gap-8 2xl:flex-row justify-between mb-9">
+        <TextField
+          label="Search"
+          placeholder="Search"
+          className="w-full md:w-72"
+        />
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`${
+            filter ? 'flex' : 'hidden'
+          } flex absolute shadow-lg xl:shadow-none top-16 md:top-[90px] transition-all ease-in-out duration-300 -right-2 min-[425px]:right-0 p-6 min-[425px]:p-8 z-10 rounded-2xl xl:rounded-none border xl:border-none xl:p-0 bg-white xl:static flex-col xl:flex-row gap-10 xl:items-center xl:flex`}
+        >
+          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
+            <div className="text-sm text-grey">Work type</div>
+            <div className="flex flex-row gap-2.5 items-center">
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Hourly
+              </div>
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Weekly
+              </div>
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Mouthly
+              </div>
             </div>
           </div>
-          <div className="flex flex-row gap-2.5 items-center">
-            <div className="text-sm">Level</div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              High
-            </div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Medium
+          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
+            <div className="text-sm text-grey">Level</div>
+            <div className="flex flex-row gap-2.5 items-center">
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                High
+              </div>
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Medium
+              </div>
             </div>
           </div>
-          <div className="flex flex-row gap-2.5 items-center">
-            <div className="text-sm">Size</div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Large
-            </div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Medium
-            </div>
-            <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-              Small
+          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
+            <div className="text-sm text-grey">Size</div>
+            <div className="flex flex-row gap-2.5 items-center">
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Large
+              </div>
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Medium
+              </div>
+              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
+                Small
+              </div>
             </div>
           </div>
         </div>
@@ -79,7 +108,7 @@ const Resources = () => {
         {persons.map((person) => (
           <div
             key={person.id}
-            className={`rounded-xl border p-3 md:p-5 flex gap-3 md:gap-6 ${
+            className={`rounded-xl relative border p-3 md:p-5 flex gap-3 md:gap-6 ${
               person.id % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
             }`}
           >

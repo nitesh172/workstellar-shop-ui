@@ -38,6 +38,7 @@ export type DropDownProps = {
   onScrollEnd?: Function
   isDisabled?: boolean
   iconEnabled?: boolean
+  primary?: boolean
 }
 
 export type ContactDetailWithFormProps = {
@@ -56,4 +57,16 @@ export type CheckBoxProps = {
 
 export type FormProps = {
   setAuth: React.Dispatch<React.SetStateAction<string>>
+}
+
+export type PopupEncloserProps = {
+  show: boolean
+  close: (Option: boolean) => void
+  children: React.ReactNode
+}
+
+export interface CarouselProps {
+  readonly data: any[]
+  className?: string
+  readonly renderItem: (item: any, index: number, isSnapPoint: boolean) => React.ReactElement
 }
