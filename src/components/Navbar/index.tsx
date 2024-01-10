@@ -44,12 +44,6 @@ const Navbar = () => {
       scrollID: 'Testimonials',
     },
     {
-      id: 5,
-      name: 'About us',
-      url: '/',
-      scrollID: 'About us',
-    },
-    {
       id: 6,
       name: 'Contact us',
       url: '/',

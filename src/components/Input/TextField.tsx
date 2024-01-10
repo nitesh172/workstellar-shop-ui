@@ -13,7 +13,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
       </label>
       <input
         type="text"
-        className="outline-none rounded-lg w-full p-5"
+        className="outline-none  text-base rounded-lg w-full p-5"
         placeholder={placeholder}
       />
     </div>

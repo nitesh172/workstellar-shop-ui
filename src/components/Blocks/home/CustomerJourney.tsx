@@ -1,11 +1,16 @@
+'use client'
 import Carousel from '@/components/Carousel'
+import PopupEncloser from '@/components/PopupEncloser/PopupEncloser'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
+import ScheduleMeeting from '../ScheduleMeeting'
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 const VideoFrame = dynamic(() => import('./VideoFrame'))
 
 const CustomerJourney = () => {
+  const [mPopup, setMPopup] = useState<boolean>(false)
+
   const itResources = [
     'Guides the customer,',
     'Asks questions so we can help the customer the best way',
@@ -13,6 +18,8 @@ const CustomerJourney = () => {
   ]
 
   const testimonials = [1, 2, 3, 4, 5, 6, 7]
+
+  const handlePopup = () => setMPopup(!mPopup)
 
   return (
     <div className="py-7 md:py-14">
@@ -44,6 +51,7 @@ const CustomerJourney = () => {
               </div>
             </div>
             <Button
+              onClick={handlePopup}
               text="Let’s talk"
               className="rounded-[40px] rounded-tl-none"
               dark
@@ -52,6 +60,7 @@ const CustomerJourney = () => {
           <div className='w-full h-[569px] bg-[url("/images/cus_jou_block_m_2.svg")] md:bg-[url("/images/cus_jou_block_d_2.svg")] lg:bg-[url("/images/cus_jou_block_m_2.svg")] xl:bg-[url("/images/cus_jou_block_d_2.svg")] bg-cover flex flex-col justify-end gap-6 rounded-3xl p-6 bg-no-repeat'>
             <Button
               text="Let’s talk"
+              onClick={handlePopup}
               className="rounded-[40px] rounded-tl-none"
               dark
             />
@@ -126,6 +135,9 @@ const CustomerJourney = () => {
           />
         </div>
       </div>
+      <PopupEncloser show={mPopup} close={handlePopup}>
+        <ScheduleMeeting />
+      </PopupEncloser>
     </div>
   )
 }

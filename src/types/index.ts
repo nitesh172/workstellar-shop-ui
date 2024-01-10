@@ -15,8 +15,9 @@ export type ButtonProps = {
 }
 
 export type VideoFrameProps = {
-  id?: number | string
+  id?:  string
   className?: string
+  autoplay?: boolean
 }
 
 export type TextFieldProps = {

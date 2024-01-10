@@ -30,13 +30,13 @@ const HeroSection = () => {
           Empower Your Vision, Elevate Your Presence: Where Creativity Meets
           Code!
         </div>
-        <div className="text-base md:text-lg lg:text-xl">
+        <div className="text-base md:text-lg lg:text-xl text-grey">
           Empower your digital vision with top-tier developers and designers.
           Elevate your online presence effortlessly.
         </div>
         <Button text="Let’s talk" dark onClick={handlePopup}  />
       </div>
-      <VideoFrame className="w-full xl:w-[87%] flex flex-col gap-0.5" />
+      <VideoFrame autoplay className="w-full xl:w-[87%] flex flex-col gap-0.5" />
       <PopupEncloser show={mPopup} close={handlePopup}>
         <ScheduleMeeting />
       </PopupEncloser>

@@ -73,7 +73,7 @@ const Resources = () => {
                 Weekly
               </div>
               <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                Mouthly
+                Monthly
               </div>
             </div>
           </div>
