@@ -43,18 +43,13 @@ const VideoFrame: React.FC<VideoFrameProps> = (props) => {
             <source src="/videos/video_1.mp4" />
           </video>
           {!autoplay && !play && (
-            <div className="absolute top-0 right-0 w-full h-full">
-              <div className="relative">
-                <Image
-                  src="/images/play.svg"
-                  alt=""
-                  width={17}
-                  height={17}
-                  className="w-full h-full"
-                />
-                <div className='absolute text-base md:text-3xl lg:text-5xl xl:text-4xl font-pacifico text-white top-14 md:top-24 lg:top-36 xl:top-28 left-8 md:left-16 xl:left-14 -rotate-[17deg]'>Why us?</div>
-              </div>
-            </div>
+            <Image
+            src="/images/play.svg"
+            alt=""
+            width={17}
+            height={17}
+            className="absolute top-5 min-[375px]:top-8 min-[425px]:top-10 md:top-16 lg:top-24 xl:top-20 min-[1920px]:top-24 left-4 min-[375px]:left-6 min-[425px]:left-8 md:left-10 xl:left-14 min-[1920px]:left-20 bottom-0 right-0 w-28 min-[375px]:w-32 min-[425px]:w-36 md:w-64 lg:w-96 xl:w-64 min-[1920px]:w-[400px]"
+          />
           )}
         </div>
       </div>
