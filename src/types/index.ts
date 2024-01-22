@@ -1,8 +1,4 @@
-import React, {
-  ButtonHTMLAttributes,
-  FocusEventHandler,
-  MouseEventHandler,
-} from 'react'
+import React, { ButtonHTMLAttributes, FocusEventHandler } from 'react'
 
 export type ButtonProps = {
   text: string
@@ -15,7 +11,7 @@ export type ButtonProps = {
 }
 
 export type VideoFrameProps = {
-  id?:  string
+  id?: string
   className?: string
   autoplay?: boolean
 }
@@ -40,6 +36,7 @@ export type DropDownProps = {
   isDisabled?: boolean
   iconEnabled?: boolean
   primary?: boolean
+  className?: string
 }
 
 export type ContactDetailWithFormProps = {
@@ -56,18 +53,22 @@ export type CheckBoxProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export type FormProps = {
-  setAuth: React.Dispatch<React.SetStateAction<string>>
-}
-
 export type PopupEncloserProps = {
   show: boolean
   close: (Option: boolean) => void
   children: React.ReactNode
 }
 
-export interface CarouselProps {
+export type CarouselProps = {
   readonly data: any[]
   className?: string
-  readonly renderItem: (item: any, index: number, isSnapPoint: boolean) => React.ReactElement
+  readonly renderItem: (
+    item: any,
+    index: number,
+    isSnapPoint: boolean
+  ) => React.ReactElement
+}
+
+export type AuthWrapperProps = {
+  children: React.ReactNode
 }

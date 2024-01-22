@@ -1,7 +1,8 @@
 import React from 'react'
-import Calender from '../Calender'
-import TextField from '../Input/TextField'
-import Button from '../Buttons/Button'
+import dynamic from 'next/dynamic'
+const Calender = dynamic(() => import('../Calender'))
+const Button = dynamic(() => import('@/components/Buttons/Button'))
+const TextField = dynamic(() => import('@/components/Input/TextField'))
 
 const ScheduleMeeting = () => {
   return (

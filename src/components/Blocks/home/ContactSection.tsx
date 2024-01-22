@@ -1,8 +1,10 @@
-import Button from '@/components/Buttons/Button'
-import TextField from '@/components/Input/TextField'
+'use client'
 import React from 'react'
-import ContactDetailWithForm from '../ContactDetailWithForm'
-import { DropDown } from '@/components/Dropdown/Dropdown'
+import dynamic from 'next/dynamic'
+const Button = dynamic(() => import('@/components/Buttons/Button'))
+const TextField = dynamic(() => import('@/components/Input/TextField'))
+const DropDown = dynamic(() => import('@/components/Dropdown/Dropdown'))
+const ContactDetailWithForm = dynamic(() => import('../ContactDetailWithForm'))
 
 const ContactSection = () => {
   let workType = [

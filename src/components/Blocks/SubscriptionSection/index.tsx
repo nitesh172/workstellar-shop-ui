@@ -1,8 +1,9 @@
 'use client'
-import Button from '@/components/Buttons/Button'
-import { DropDown } from '@/components/Dropdown/Dropdown'
-import CheckBox from '@/components/Input/CheckBox'
 import React from 'react'
+import dynamic from 'next/dynamic'
+const Button = dynamic(() => import('@/components/Buttons/Button'))
+const DropDown = dynamic(() => import('@/components/Dropdown/Dropdown'))
+const CheckBox = dynamic(() => import('@/components/Input/CheckBox'))
 
 const SubscriptionSection = () => {
   let workType = [
@@ -150,7 +151,12 @@ const SubscriptionSection = () => {
             <div className="text-sm font-bold mb-4">Select Resources</div>
             <div className="max-h-64 flex flex-col gap-2 overflow-scroll">
               {list.map((person, index) => (
-                <CheckBox key={index} id={`checkbox-${index}`} label={person.name} value={person.value} />
+                <CheckBox
+                  key={index}
+                  id={`checkbox-${index}`}
+                  label={person.name}
+                  value={person.value}
+                />
               ))}
             </div>
           </div>

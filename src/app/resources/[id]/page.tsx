@@ -1,16 +1,16 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import React from 'react'
-const CheckBox = dynamic(() => import('@/components/Input/CheckBox'))
+const SubscriptionSection = dynamic(() => import('@/components/Blocks/SubscriptionSection'))
 
 const Resource = ({ params }: { params: { id: string } }) => {
   const { id } = params
-  
+
   return (
-    <div className="py-7 md:py-14">
-      <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
-      <div className="py-5 flex flex-col items-center lg:flex-row gap-8 lg:gap-[5%]">
-        <div className="rounded-xl relative w-full md:w-fit border p-3 md:p-5 flex gap-3 md:gap-6 flex-col">
+    <div className="py-7 md:py-14 relative">
+      <div className="py-7 md:py-14">
+        <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
+        <div className="rounded-2xl border p-5 flex flex-col items-center lg:flex-row gap-8 lg:gap-[5%]">
           <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
             <Image
               src="/images/person_1.svg"
@@ -18,43 +18,41 @@ const Resource = ({ params }: { params: { id: string } }) => {
               height={270}
               className="w-32 md:w-56 h-[150px] md:h-[224px]"
               alt="person_image"
+              loading="lazy"
             />
           </div>
-          <div className="flex flex-row items-center justify-between">
-            <div>
-              <div className="text-base md:text-xl font-medium text-black">
-                Floyd Miles
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-2 items-center">
+                <div className="text-2xl font-bold mb-1">Haley cooper</div>
+                <div className="">
+                  5 years of experience | Front-end Developer
+                </div>
               </div>
-              <div className="text-sm font-medium text-grey">Developer</div>
+              <div className="text-grey">Copenhagen, Denmark</div>
             </div>
-            <Image
-              src="/images/redirect.svg"
-              alt="redirect"
-              className="absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6"
-              width={24}
-              height={24}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col gap-4">
-          <div className="text-2xl md:text-4xl font-bold">Developer</div>
-          <div className="text-lg md:text-2xl">Lorem ipsum doret dexit</div>
-          <div className="flex flex-col gap-3">
-            <CheckBox
-              id="checkn"
-              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
-            />
-            <CheckBox
-              id="checkn"
-              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
-            />
-            <CheckBox
-              id="checkn"
-              label="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to"
-            />
+            <div>
+              I am developer interested in making clean and optimized code
+            </div>
+            <div className="flex flex-col gap-3">
+              <div>Skills</div>
+              <div className="flex flex-row flex-wrap gap-3">
+                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
+                  Javascript
+                </div>
+                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
+                  HTML
+                </div>
+                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
+                  CSS
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <SubscriptionSection />
     </div>
   )
 }

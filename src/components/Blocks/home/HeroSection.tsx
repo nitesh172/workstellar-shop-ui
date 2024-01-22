@@ -1,22 +1,15 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useRef, useState } from 'react'
-import VideoFrame from './VideoFrame'
-import PopupEncloser from '@/components/PopupEncloser/PopupEncloser'
-import ScheduleMeeting from '../ScheduleMeeting'
+import { useState } from 'react'
+const VideoFrame = dynamic(() => import('./VideoFrame'))
 const Button = dynamic(() => import('@/components/Buttons/Button'))
+const ScheduleMeeting = dynamic(() => import('../ScheduleMeeting'))
+const PopupEncloser = dynamic(
+  () => import('@/components/PopupEncloser/PopupEncloser')
+)
 
 const HeroSection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null)
   const [mPopup, setMPopup] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (videoRef && videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.error('Error attempting to play', error)
-      })
-    }
-  }, [videoRef])
 
   const handlePopup = () => setMPopup(!mPopup)
 
@@ -34,9 +27,12 @@ const HeroSection = () => {
           Empower your digital vision with top-tier developers and designers.
           Elevate your online presence effortlessly.
         </div>
-        <Button text="Let’s talk" dark onClick={handlePopup}  />
+        <Button text="Let’s talk" dark onClick={handlePopup} />
       </div>
-      <VideoFrame autoplay className="w-full xl:w-[87%] flex flex-col gap-0.5" />
+      <VideoFrame
+        autoplay
+        className="w-full xl:w-[87%] flex flex-col gap-0.5"
+      />
       <PopupEncloser show={mPopup} close={handlePopup}>
         <ScheduleMeeting />
       </PopupEncloser>

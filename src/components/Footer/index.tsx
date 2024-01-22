@@ -41,6 +41,7 @@ const Footer = () => {
                   className="w-[42px] h-[42px] cursor-pointer"
                   width={42}
                   height={42}
+                  loading='lazy'
                   alt="social-link"
                 />
               </a>

@@ -1,6 +1,6 @@
-import { ContactDetailWithFormProps } from '@/types'
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image'
+import { ContactDetailWithFormProps } from '@/types'
 
 const ContactDetailWithForm: React.FC<ContactDetailWithFormProps> = (props) => {
   const { id, children, label } = props

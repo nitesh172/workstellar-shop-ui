@@ -37,7 +37,7 @@ const Resources = () => {
 
   return (
     <div className="py-7 md:py-14 relative" onClick={() => setFilter(false)}>
-      <div className="flex flex-row justify-between items-centerf">
+      <div className="flex flex-row justify-between items-center">
         <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
         <Image
           src="/images/filter.svg"

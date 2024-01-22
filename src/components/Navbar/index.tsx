@@ -107,7 +107,7 @@ const Navbar = () => {
       <Button
         text="Hire resource"
         className="self-center px-5"
-        onClick={() => router.push('/auth')}
+        onClick={() => router.push('/login')}
       />
       <div
         id="menu"

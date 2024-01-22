@@ -1,12 +1,14 @@
 'use client'
-import Carousel from '@/components/Carousel'
-import PopupEncloser from '@/components/PopupEncloser/PopupEncloser'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
-import ScheduleMeeting from '../ScheduleMeeting'
-const Button = dynamic(() => import('@/components/Buttons/Button'))
 const VideoFrame = dynamic(() => import('./VideoFrame'))
+const Carousel = dynamic(() => import('@/components/Carousel'))
+const Button = dynamic(() => import('@/components/Buttons/Button'))
+const ScheduleMeeting = dynamic(() => import('../ScheduleMeeting'))
+const PopupEncloser = dynamic(
+  () => import('@/components/PopupEncloser/PopupEncloser')
+)
 
 const CustomerJourney = () => {
   const [mPopup, setMPopup] = useState<boolean>(false)
@@ -39,6 +41,7 @@ const CustomerJourney = () => {
                     <Image
                       src="/images/checkbox.svg"
                       width={24}
+                      loading='lazy'
                       height={24}
                       alt="checkbox"
                       className="w-6 h-6"
@@ -75,6 +78,7 @@ const CustomerJourney = () => {
                       src="/images/checkbox.svg"
                       width={24}
                       height={24}
+                      loading='lazy'
                       alt="checkbox"
                       className="w-6 h-6"
                     />

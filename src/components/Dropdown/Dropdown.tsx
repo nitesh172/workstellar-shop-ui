@@ -4,7 +4,7 @@ import { useOnClickOutside } from '@/hooks/useOutsideClick'
 import { DropDownProps } from '@/types'
 import Image from 'next/image'
 
-export const DropDown: React.FC<DropDownProps> = (props) => {
+const DropDown: React.FC<DropDownProps> = (props) => {
   const {
     option,
     availableOptions,
@@ -17,6 +17,7 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
     onScrollEnd,
     isDisabled,
     name,
+    className,
     primary,
   } = props
 
@@ -43,7 +44,7 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
   useOnClickOutside(ref, handleClickOutside)
 
   return (
-    <div className="flex flex-col gap-1.5 w-full">
+    <div className={`flex flex-col gap-1.5 w-full ${className ? className : ''}`}>
       <div
         ref={ref}
         onBlur={onBlur}
@@ -136,3 +137,5 @@ export const DropDown: React.FC<DropDownProps> = (props) => {
     </div>
   )
 }
+
+export default DropDown
