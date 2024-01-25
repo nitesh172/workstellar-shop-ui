@@ -1,4 +1,5 @@
 'use client'
+import { useAuthContext } from '@/context/AuthContext'
 import dynamic from 'next/dynamic'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -9,6 +10,7 @@ const Button = dynamic(() => import('../Buttons/Button'))
 const Navbar = () => {
   const router = useRouter()
   const [sideBar, setSidebar] = useState<boolean>(false)
+  const { isAuthenticated, setPath } = useAuthContext()
 
   const path = usePathname()
 
@@ -107,7 +109,11 @@ const Navbar = () => {
       <Button
         text="Hire resource"
         className="self-center px-5"
-        onClick={() => router.push('/login')}
+        onClick={() => {
+          console.log(isAuthenticated)
+          !!isAuthenticated ? router.push('/resources') : router.push('/login')
+          setPath(path)
+        }}
       />
       <div
         id="menu"

@@ -1,10 +1,14 @@
-import React, { ButtonHTMLAttributes, FocusEventHandler } from 'react'
+import React, {
+  CSSProperties,
+  FocusEventHandler,
+  HTMLInputTypeAttribute,
+} from 'react'
 
 export type ButtonProps = {
   text: string
   onClick?: Function
   className?: string
-  type?: ButtonHTMLAttributes<HTMLButtonElement>
+  type?: 'button' | 'submit' | 'reset'
   submitLoading?: boolean
   isDisabled?: boolean
   dark?: boolean
@@ -20,6 +24,14 @@ export type TextFieldProps = {
   label: string
   placeholder: string
   className?: string
+  name?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur?: FocusEventHandler<HTMLInputElement>
+  style?: CSSProperties
+  value?: any
+  type?: HTMLInputTypeAttribute
+  error?: any
+  touched?: any
 }
 
 export type DropDownProps = {
@@ -30,13 +42,15 @@ export type DropDownProps = {
   name?: string
   availableOptionKey: string
   onBlur?: FocusEventHandler<HTMLElement>
-  errorText?: string
+  error?: any
   isInvalid?: boolean
   onScrollEnd?: Function
   isDisabled?: boolean
   iconEnabled?: boolean
   primary?: boolean
   className?: string
+  selectOptionKey?: string
+  touched?: any
 }
 
 export type ContactDetailWithFormProps = {
@@ -71,4 +85,52 @@ export type CarouselProps = {
 
 export type AuthWrapperProps = {
   children: React.ReactNode
+}
+
+export enum HttpMethod {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  DELETE = 'delete',
+  PATCH = 'patch',
+}
+
+export declare type ApiHookProps = {
+  method?: HttpMethod
+  baseURI: string
+  doneCb?: (resp: any) => void
+  errorCb?: (err: any) => void
+}
+
+export declare type PayloadType = Record<string, any>
+
+export type RegisterUser = {
+  email: string
+  entityName: string
+  role: string
+  city: string
+  country: string
+  state: string
+  zipcode: string
+}
+
+export type LoginUser = {
+  email: string
+  password: string
+}
+
+export type UserProps = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  email: string
+  entityName: string
+  // talent: Talent
+  role: string
+  status: string
+  country: string
+  state: string
+  city: string
+  zipcode: string
+  lastActive: string
 }
