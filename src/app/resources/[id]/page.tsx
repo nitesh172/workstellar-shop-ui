@@ -1,10 +1,35 @@
+'use client'
+import { HttpMethod, TalentProps } from '@/types'
+import { useCaller } from '@/utils/API'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import React from 'react'
-const SubscriptionSection = dynamic(() => import('@/components/Blocks/SubscriptionSection'))
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+const SubscriptionSection = dynamic(
+  () => import('@/components/Blocks/SubscriptionSection')
+)
 
 const Resource = ({ params }: { params: { id: string } }) => {
   const { id } = params
+
+  const [talent, setTalent] = useState<TalentProps | null>(null)
+
+  const { execute: fetchResource } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: TalentProps) => {
+      if (!resp) return
+      setTalent(resp)
+    },
+    errorCb: (failed: any) => {
+      toast.error(failed)
+    },
+  })
+
+  useEffect(() => {
+    if (id) {
+      fetchResource(`talents/${id}`)
+    }
+  }, [id])
 
   return (
     <div className="py-7 md:py-14 relative">
@@ -24,28 +49,28 @@ const Resource = ({ params }: { params: { id: string } }) => {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <div className="flex flex-row gap-2 items-center">
-                <div className="text-2xl font-bold mb-1">Haley cooper</div>
+                <div className="text-2xl font-bold mb-1">
+                  {talent?.user?.entityName}
+                </div>
                 <div className="">
-                  5 years of experience | Front-end Developer
+                  {talent?.experienceYear} years of experience |{' '}
+                  {talent?.designation}
                 </div>
               </div>
-              <div className="text-grey">Copenhagen, Denmark</div>
+              <div className="text-grey">
+                {talent?.user?.city}, {talent?.user?.country}
+              </div>
             </div>
-            <div>
-              I am developer interested in making clean and optimized code
-            </div>
+            <div>{talent?.headline}</div>
             <div className="flex flex-col gap-3">
               <div>Skills</div>
               <div className="flex flex-row flex-wrap gap-3">
-                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
-                  Javascript
-                </div>
-                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
-                  HTML
-                </div>
-                <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
-                  CSS
-                </div>
+                {!!talent?.skills?.length &&
+                  talent.skills.map((skills) => (
+                    <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
+                      {skills.name}
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

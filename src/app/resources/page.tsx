@@ -1,39 +1,50 @@
 'use client'
 import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
 import TextField from '@/components/Input/TextField'
+import { useAppContext } from '@/context/AppContext'
+import { HttpMethod, TalentProps, TalentResponseProps } from '@/types'
+import { useCaller } from '@/utils/API'
+import { level, levels, workType } from '@/utils/config'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const Resources = () => {
   const router = useRouter()
   const [filter, setFilter] = useState<boolean>(false)
-  const persons = [
-    {
-      id: 0,
-      name: 'Floyd Miles',
-      role: 'Developer',
-      images: '/images/person_1.svg',
+  const [talent, setTalent] = useState<TalentProps[]>([])
+
+  const [workFilter, setWorkFilter] = useState<string>('')
+  const [levelFilter, setLevelFilter] = useState<string>('')
+  const [search, setSearch] = useState<boolean>(false)
+  const [searchText, setSearchText] = useState<string>('')
+
+  const { execute: fetchResources } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: TalentResponseProps) => {
+      if (!resp) return
+      setTalent(resp.talents)
     },
-    {
-      id: 1,
-      name: 'Rachel McDermott',
-      role: 'Mechanical Engineering',
-      images: '/images/person_2.svg',
+    errorCb: (failed: any) => {
+      toast.error(failed)
     },
-    {
-      id: 2,
-      name: 'Jenny Wilson',
-      role: 'DevOps',
-      images: '/images/person_3.svg',
-    },
-    {
-      id: 3,
-      name: 'Rachel McDermott',
-      role: 'Mechanical Engineering',
-      images: '/images/person_4.svg',
-    },
-  ]
+  })
+
+  useEffect(() => {
+    fetchResources(
+      `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}`
+    )
+  }, [workFilter, levelFilter])
+
+  useEffect(() => {
+    if (searchText && search) {
+      fetchResources(
+        `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}`
+      )
+      setSearch(false)
+    }
+  }, [search])
 
   return (
     <div className="py-7 md:py-14 relative" onClick={() => setFilter(false)}>
@@ -55,7 +66,17 @@ const Resources = () => {
         <TextField
           label="Search"
           placeholder="Search"
-          className="w-full md:w-72"
+          className="w-full md:w-96"
+          onkeyPressed={() => setSearch(true)}
+          onChange={(e) => {
+            if (e.target.value === '') {
+              fetchResources(
+                `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}`
+              )
+            }
+            setSearchText(e.target.value)
+          }}
+          value={searchText}
         />
         <div
           onClick={(e) => e.stopPropagation()}
@@ -66,29 +87,46 @@ const Resources = () => {
           <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
             <div className="text-sm text-grey">Work type</div>
             <div className="flex flex-row gap-2.5 items-center">
-              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                Hourly
-              </div>
-              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                Weekly
-              </div>
-              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                Monthly
-              </div>
+              {workType.map((type) => (
+                <div
+                  onClick={() =>
+                    workFilter === type.value
+                      ? setWorkFilter('')
+                      : setWorkFilter(type.value)
+                  }
+                  className={`rounded-3xl cursor-pointer border border-black hover:bg-black hover:text-white py-2 px-4 ${
+                    workFilter === type.value
+                      ? 'bg-black text-white'
+                      : 'bg-transparent'
+                  }`}
+                >
+                  {type.name}
+                </div>
+              ))}
             </div>
           </div>
           <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
             <div className="text-sm text-grey">Level</div>
             <div className="flex flex-row gap-2.5 items-center">
-              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                High
-              </div>
-              <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
-                Medium
-              </div>
+              {levels.map((level) => (
+                <div
+                  onClick={() =>
+                    levelFilter === level.value
+                      ? setLevelFilter('')
+                      : setLevelFilter(level.value)
+                  }
+                  className={`rounded-3xl cursor-pointer border border-black hover:bg-black hover:text-white py-2 px-4 ${
+                    levelFilter === level.value
+                      ? 'bg-black text-white'
+                      : 'bg-transparent'
+                  }`}
+                >
+                  {level.name}
+                </div>
+              ))}
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
+          {/* <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
             <div className="text-sm text-grey">Size</div>
             <div className="flex flex-row gap-2.5 items-center">
               <div className="rounded-3xl cursor-pointer border border-black hover:bg-black bg-transparent hover:text-white py-2 px-4">
@@ -101,20 +139,20 @@ const Resources = () => {
                 Small
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="grid grid-cols-1 min-[425px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-7">
-        {persons.map((person) => (
+        {talent.map((talent, inx) => (
           <div
-            key={person.id}
+            key={talent.id}
             className={`rounded-xl relative border p-3 md:p-5 flex gap-3 md:gap-6 ${
-              person.id % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
+              inx % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
             }`}
           >
             <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
               <Image
-                src={person.images}
+                src={`/images/${talent.avatar}.svg`}
                 width={224}
                 height={270}
                 className="w-32 md:w-56 h-[150px] md:h-[224px]"
@@ -124,16 +162,16 @@ const Resources = () => {
             <div className="flex flex-row items-center justify-between">
               <div>
                 <div className="text-base md:text-xl font-medium text-black">
-                  {person.name}
+                  {talent.user.entityName}
                 </div>
                 <div className="text-sm font-medium text-grey">
-                  {person.role}
+                  {talent.designation}
                 </div>
               </div>
               <Image
                 src="/images/redirect.svg"
                 alt="redirect"
-                onClick={() => router.push(`/resources/1`)}
+                onClick={() => router.push(`/resources/${talent.id}`)}
                 className="cursor-pointer absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6"
                 width={24}
                 height={24}
@@ -148,3 +186,30 @@ const Resources = () => {
 }
 
 export default Resources
+
+// const persons = [
+//   {
+//     id: 0,
+//     name: 'Floyd Miles',
+//     role: 'Developer',
+//     images: '/images/person_1.svg',
+//   },
+//   {
+//     id: 1,
+//     name: 'Rachel McDermott',
+//     role: 'Mechanical Engineering',
+//     images: '/images/person_2.svg',
+//   },
+//   {
+//     id: 2,
+//     name: 'Jenny Wilson',
+//     role: 'DevOps',
+//     images: '/images/person_3.svg',
+//   },
+//   {
+//     id: 3,
+//     name: 'Rachel McDermott',
+//     role: 'Mechanical Engineering',
+//     images: '/images/person_4.svg',
+//   },
+// ]

@@ -1,34 +1,19 @@
+'use client'
 import React from 'react'
 import Menus from './Menu'
 import Button from '../Buttons/Button'
 import BrandLogo from '../Blocks/BrandLogo'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { socialLink } from '@/utils/config'
 
 const Footer = () => {
-  const socialLink = [
-    {
-      image: '/images/instagram.svg',
-      link: 'https://www.instagram.com',
-    },
-    {
-      image: '/images/facebook.svg',
-      link: 'www.facebook.com',
-    },
-    {
-      image: '/images/twitter.svg',
-      link: 'www.twitter.com',
-    },
-    {
-      image: '/images/pintrest.svg',
-      link: 'www.pintrest.com',
-    },
-  ]
-
+  const router = useRouter()
   return (
     <div className="px-8 md:px-16 lg:px-20 xl:px-24 min-[1920px]:px-60 py-6 md:pt-20 md:pb-12 bg-footerbg">
       <div className="flex flex-col gap-10 items-start md:items-center lg:flex-row justify-between mb-10 md:mb-20">
         <Menus />
-        <Button text="Hire resource" className="px-5" />
+        <Button text="Hire resource" onClick={() => router.push("/resources")} className="px-5" />
       </div>
       <div className="flex flex-col items-start md:items-center gap-8 mb-10 md:mb-20">
         <BrandLogo />

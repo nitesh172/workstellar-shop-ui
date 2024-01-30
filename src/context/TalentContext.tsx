@@ -1,5 +1,10 @@
 'use client'
-import { HttpMethod, UserProps } from '@/types'
+import {
+  HttpMethod,
+  TalentProps,
+  TalentResponseProps,
+  UserProps,
+} from '@/types'
 import { useCaller } from '@/utils/API'
 import { getCookie } from 'cookies-next'
 import {
@@ -11,36 +16,45 @@ import {
 } from 'react'
 import { toast } from 'react-hot-toast'
 
-export type AuthContextType = {
-  setIsAuthenticated: (isAuthenticated: boolean) => void
-  isAuthenticated: boolean | null
-  fetchUser: Function
-  currentUser?: UserProps
-  path: string
-  setPath: (value: string) => void
+export type TalentContextType = {
+  talents: TalentProps[]
 }
 
-const AuthContext: any = createContext<AuthContextType>({} as AuthContextType)
-export type AuthProviderProps = {
+const TalentContext: any = createContext<TalentContextType>(
+  {} as TalentContextType
+)
+export type TalentProviderProps = {
   children?: ReactNode
 }
 
-export const useAuthContext = () => {
-  return useContext<AuthContextType>(AuthContext)
+export const useTalentContext = () => {
+  return useContext<TalentContextType>(TalentContext)
 }
 
-export const AuthProvider = (props: AuthProviderProps) => {
+export const TalentProvider = (props: TalentProviderProps) => {
   const { children } = props
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const [path, setPath] = useState<string>('')
   const [currentUser, setCurrentUser] = useState<UserProps>()
+  const [talents, setTalents] = useState<TalentProps[]>([])
 
   const { execute: fetchUser } = useCaller({
     method: HttpMethod.GET,
     doneCb: (resp: UserProps) => {
       if (!resp) return
       setCurrentUser(resp)
+    },
+    errorCb: (failed: any) => {
+      toast.error(failed)
+    },
+  })
+
+  const { execute: fetchResources } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: TalentResponseProps) => {
+      if (!resp) return
+      setTalents(resp.talents)
     },
     errorCb: (failed: any) => {
       toast.error(failed)
@@ -56,23 +70,19 @@ export const AuthProvider = (props: AuthProviderProps) => {
       setIsAuthenticated(false)
     } else {
       setIsAuthenticated(true)
+      fetchResources('talents')
       userToken && !!isAuthenticated && fetchUser('users/me')
     }
-  }, [isAuthenticated])
+  }, [])
 
-  const defaultContext: AuthContextType = {
+  const defaultContext: TalentContextType = {
     ...props,
-    isAuthenticated: isAuthenticated,
-    setIsAuthenticated,
-    currentUser,
-    fetchUser,
-    setPath,
-    path,
+    talents,
   }
 
   return (
-    <AuthContext.Provider value={defaultContext}>
+    <TalentContext.Provider value={defaultContext}>
       {children}
-    </AuthContext.Provider>
+    </TalentContext.Provider>
   )
 }

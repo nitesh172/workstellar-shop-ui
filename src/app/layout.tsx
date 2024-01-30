@@ -4,7 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Toaster } from 'react-hot-toast'
-import { AuthProvider } from '@/context/AuthContext'
+import { AppProvider } from '@/context/AppContext'
 
 const open_sans = Open_Sans({
   subsets: ['latin'],
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${open_sans.variable} ${pacifico.variable} font-open-sans`}
       >
-        <AuthProvider>
+        <AppProvider>
           <div>
             <main className="px-8 md:px-16 lg:px-20 xl:px-24 min-[1920px]:px-80">
               <Navbar />
@@ -44,7 +44,7 @@ export default function RootLayout({
               toastOptions={{ duration: 3000 }}
             />
           </div>
-        </AuthProvider>
+        </AppProvider>
       </body>
     </html>
   )

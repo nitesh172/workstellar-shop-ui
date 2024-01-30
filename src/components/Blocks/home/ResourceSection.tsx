@@ -3,48 +3,14 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { useAppContext } from '@/context/AppContext'
+import { TalentProps } from '@/types'
 const Carousel = dynamic(() => import('@/components/Carousel'))
 
 const ResourceSection = () => {
   const router = useRouter()
-  const persons = [
-    {
-      id: 0,
-      name: 'Floyd Miles',
-      role: 'Developer',
-      images: '/images/person_1.svg',
-    },
-    {
-      id: 1,
-      name: 'Rachel McDermott',
-      role: 'Mechanical Engineering',
-      images: '/images/person_2.svg',
-    },
-    {
-      id: 2,
-      name: 'Jenny Wilson',
-      role: 'DevOps',
-      images: '/images/person_3.svg',
-    },
-    {
-      id: 3,
-      name: 'Rachel McDermott',
-      role: 'Mechanical Engineering',
-      images: '/images/person_4.svg',
-    },
-    {
-      id: 2,
-      name: 'Jenny Wilson',
-      role: 'DevOps',
-      images: '/images/person_3.svg',
-    },
-    {
-      id: 3,
-      name: 'Rachel McDermott',
-      role: 'Mechanical Engineering',
-      images: '/images/person_4.svg',
-    },
-  ]
+
+  const { homeTalents } = useAppContext()
 
   return (
     <div id="Resources" className="py-7 md:py-14">
@@ -52,8 +18,8 @@ const ResourceSection = () => {
         Resources
       </div>
       <Carousel
-        data={persons}
-        renderItem={(person, i, isSnapPoint) => (
+        data={homeTalents}
+        renderItem={(talent: TalentProps, i, isSnapPoint) => (
           <div
             key={i}
             className={`flex-shrink-0 ${
@@ -61,19 +27,19 @@ const ResourceSection = () => {
             } w-full md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col pl-2 pr-2 gap-2`}
           >
             <div
-              key={person.id}
+              key={talent.id}
               className={`rounded-xl relative border p-3 md:p-5 flex gap-3 md:gap-6 ${
-                person.id % 2 === 0
+                i % 2 === 0
                   ? 'flex-col'
                   : 'flex-col md:flex-col-reverse'
               }`}
             >
               <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
                 <Image
-                  src={person.images}
+                  src={`/images/${talent.avatar}.svg`}
                   width={224}
                   height={270}
-                  loading='lazy'
+                  loading="lazy"
                   className="w-32 md:w-56 h-[150px] md:h-[224px]"
                   alt="person_image"
                 />
@@ -81,16 +47,16 @@ const ResourceSection = () => {
               <div className="flex flex-row items-center justify-between">
                 <div>
                   <div className="text-base md:text-xl font-medium text-black">
-                    {person.name}
+                    {talent.user.entityName}
                   </div>
                   <div className="text-sm font-medium text-grey">
-                    {person.role}
+                    {talent.designation}
                   </div>
                 </div>
                 <Image
                   src="images/redirect.svg"
                   alt="redirect"
-                  loading='lazy'
+                  loading="lazy"
                   onClick={() => router.push(`/resources/1`)}
                   className="absolute md:static cursor-pointer top-4 right-4 w-4 h-4 md:h-6 md:w-6"
                   width={24}

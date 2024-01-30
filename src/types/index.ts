@@ -32,6 +32,7 @@ export type TextFieldProps = {
   type?: HTMLInputTypeAttribute
   error?: any
   touched?: any
+  onkeyPressed?: () => void
 }
 
 export type DropDownProps = {
@@ -104,28 +105,12 @@ export declare type ApiHookProps = {
 
 export declare type PayloadType = Record<string, any>
 
-export type RegisterUser = {
-  email: string
-  entityName: string
-  role: string
-  city: string
-  country: string
-  state: string
-  zipcode: string
-}
-
-export type LoginUser = {
-  email: string
-  password: string
-}
-
 export type UserProps = {
   id: number
   createdAt: string
   updatedAt: string
   email: string
   entityName: string
-  // talent: Talent
   role: string
   status: string
   country: string
@@ -133,4 +118,27 @@ export type UserProps = {
   city: string
   zipcode: string
   lastActive: string
+}
+
+export type TalentProps = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  skills: {name: string}[]
+  amount: {}
+  paymentType: string
+  headline: string
+  experienceYear: number
+  designation: string
+  level: string
+  avatar: string
+  user: UserProps
+}
+
+export type TalentResponseProps = {
+  talents: TalentProps[]
+  total: number
+  perPage: number
+  currentPage: number
+  totalPage: number
 }
