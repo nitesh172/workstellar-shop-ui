@@ -34,7 +34,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
               onkeyPressed && onkeyPressed()
             }
           }}
-          value={value && name && !!value[name] ? value[name] : value}
+          value={name && !!value[name] ? value[name] : !name && value ? value : ''}
           onBlur={onBlur}
           onChange={(e) => onChange && onChange(e)}
           className="outline-none  text-base rounded-lg w-full p-5"
