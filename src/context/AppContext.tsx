@@ -46,6 +46,7 @@ export const AppProvider = (props: AppProviderProps) => {
   useEffect(() => {
     setLoading(true)
     fetchHomeResources('talents?perPage=1000')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const defaultContext: AppContextType = {

@@ -29,6 +29,7 @@ const Resource = ({ params }: { params: { id: string } }) => {
     if (id) {
       fetchResource(`talents/${id}`)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return (
@@ -66,8 +67,8 @@ const Resource = ({ params }: { params: { id: string } }) => {
               <div>Skills</div>
               <div className="flex flex-row flex-wrap gap-3">
                 {!!talent?.skills?.length &&
-                  talent.skills.map((skills) => (
-                    <div className="bg-chipColor rounded-[32px] p-5 py-2.5">
+                  talent.skills.map((skills, inx) => (
+                    <div key={`skills-${inx}`} className="bg-chipColor rounded-[32px] p-5 py-2.5">
                       {skills.name}
                     </div>
                   ))}

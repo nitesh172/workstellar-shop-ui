@@ -41,6 +41,7 @@ const SubscriptionSection = () => {
 
   useEffect(() => {
     selectWorkType && selectLevel && fetchResources(`talents?perPage=1000&paymentType=${selectWorkType}&level=${selectLevel}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectWorkType, selectLevel])
 
   return (
@@ -56,7 +57,7 @@ const SubscriptionSection = () => {
             <div className="text-sm md:texxt-base text-grey text-center">
               To subscribe, simply fill out our contact form,
               <br />
-              and we'll reach out to you shortly.
+              and we`&apos;`ll reach out to you shortly.
             </div>
           </div>
         </div>

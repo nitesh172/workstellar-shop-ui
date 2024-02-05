@@ -35,6 +35,7 @@ const Resources = () => {
     fetchResources(
       `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}`
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workFilter, levelFilter])
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const Resources = () => {
       )
       setSearch(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   return (
@@ -87,8 +89,9 @@ const Resources = () => {
           <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
             <div className="text-sm text-grey">Work type</div>
             <div className="flex flex-row gap-2.5 items-center">
-              {workType.map((type) => (
+              {workType.map((type, inx) => (
                 <div
+                  key={inx}
                   onClick={() =>
                     workFilter === type.value
                       ? setWorkFilter('')
@@ -108,8 +111,9 @@ const Resources = () => {
           <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
             <div className="text-sm text-grey">Level</div>
             <div className="flex flex-row gap-2.5 items-center">
-              {levels.map((level) => (
+              {levels.map((level, index) => (
                 <div
+                  key={index}
                   onClick={() =>
                     levelFilter === level.value
                       ? setLevelFilter('')
