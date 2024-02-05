@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { ApiHookProps, HttpMethod, PayloadType } from '@/types'
-import { getCookie } from 'cookies-next'
 import { baseURI } from './config'
 
 export const useAPI = ({
@@ -10,7 +9,6 @@ export const useAPI = ({
   errorCb = (_) => {},
   method = HttpMethod.GET as any,
 }: ApiHookProps) => {
-  const token = getCookie('workStellarToken')
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<any>(null)
 
@@ -22,7 +20,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       })
       isError = resp.status > 300
@@ -52,7 +50,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       })
@@ -83,7 +81,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       })
@@ -113,7 +111,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       })
@@ -143,7 +141,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       })

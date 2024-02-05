@@ -7,7 +7,6 @@ import {
   InitalContactForm,
   projectPeriod,
   timeperiod,
-  workType,
 } from '@/utils/config'
 import { useFormik } from 'formik'
 import { ContactFormSchema } from '@/utils/config/schemas'

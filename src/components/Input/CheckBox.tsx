@@ -3,19 +3,19 @@ import { CheckBoxProps } from '@/types'
 import React, { useState } from 'react'
 
 const CheckBox: React.FC<CheckBoxProps> = (props) => {
-  const { id, label, name, onChange, value = false } = props
-  const [checked, setChecked] = useState<boolean>(value)
+  const { id, label, name, onChange, value = false, disabled = false } = props
+  // const [checked, setChecked] = useState<boolean>(value)
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.checked
-    setChecked(value)
-    onChange && onChange(e)
+    // setChecked(value)
+    onChange && onChange(value)
   }
 
   return (
     <div>
       <label htmlFor={id} className="flex flex-row items-center gap-2">
-        {!checked ? (
+        {!value ? (
           <svg
             width="20"
             height="20"
@@ -47,7 +47,8 @@ const CheckBox: React.FC<CheckBoxProps> = (props) => {
           onChange={handleOnChange}
           name={name}
           id={id}
-          checked={checked}
+          disabled={disabled}
+          checked={value}
           className="hidden peer"
         />
         <span className="text-grey">{label}</span>

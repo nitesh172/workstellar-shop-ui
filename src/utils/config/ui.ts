@@ -39,14 +39,17 @@ export let level = [
   {
     name: 'Entry level package',
     id: 1,
+    value: 'MEDIUM',
   },
   {
     name: 'Mid level package',
     id: 2,
+    value: 'MEDIUM',
   },
   {
     name: 'Senior level package',
     id: 3,
+    value: 'HIGH',
   },
 ]
 
@@ -67,14 +70,17 @@ export let size = [
   {
     name: 'Small',
     id: 1,
+    value: 'SMALL',
   },
   {
     name: 'Medium',
     id: 2,
+    value: 'MEDIUM',
   },
   {
     name: 'Big',
     id: 3,
+    value: 'BIG',
   },
 ]
 

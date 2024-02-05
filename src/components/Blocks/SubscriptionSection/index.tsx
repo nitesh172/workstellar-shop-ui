@@ -2,88 +2,46 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { level, size, workType } from '@/utils/config'
-import { useAppContext } from '@/context/AppContext'
+import { HttpMethod, TalentProps, TalentResponseProps } from '@/types'
+import toast from 'react-hot-toast'
+import { useCaller } from '@/utils/API'
 const DropDown = dynamic(() => import('@/components/Dropdown/Dropdown'))
 const CheckBox = dynamic(() => import('@/components/Input/CheckBox'))
 
 const SubscriptionSection = () => {
-  const [newList, setList] = useState<{ name: string; value: boolean }[]>([])
+  const [talents, setTalents] = useState<
+    { talent: TalentProps; checked: boolean }[]
+  >([])
 
-  const { homeTalents } = useAppContext()
+  const [selectWorkType, setSelectWorkType] = useState<string>('')
+  const [selectLevel, setSelectLevel] = useState<string>('')
+  const [selectSize, setSelectSize] = useState<string>('')
+  const [amount, setAmount] = useState(0)
+  const [numberOfTalent, setNumberOfTalent] = useState(0)
 
-  const list = [
-    {
-      name: 'Jacob Jones (Developer)',
-      value: true,
+  const { execute: fetchResources } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: TalentResponseProps) => {
+      if (!resp) return
+      let tempTalent = resp.talents.map((talent) => {
+        return {
+          talent,
+          checked: false,
+        }
+      })
+      setAmount(0)
+      setNumberOfTalent(0)
+      setTalents(tempTalent)
     },
-    {
-      name: 'Annette Black (Developer)',
-      value: false,
+    errorCb: (failed: any) => {
+      toast.error(failed)
     },
-    {
-      name: 'Arlene McCoy (Designer)',
-      value: false,
-    },
-    {
-      name: 'Ralph Edwards (Designer)',
-      value: true,
-    },
-    {
-      name: 'Courtney Henry (Backend)',
-      value: true,
-    },
-    {
-      name: 'Jane Cooper (Backend)',
-      value: true,
-    },
-    {
-      name: 'Dianne Russell (Backend)',
-      value: true,
-    },
-    {
-      name: 'Kathryn Murphy (Backend)',
-      value: true,
-    },
-    {
-      name: 'Ronald Richards (Testing)',
-      value: true,
-    },
-    {
-      name: 'Dianne Russell (Backend)',
-      value: true,
-    },
-    {
-      name: 'Kathryn Murphy (Backend)',
-      value: true,
-    },
-    {
-      name: 'Ronald Richards (Testing)',
-      value: true,
-    },
-    {
-      name: 'Dianne Russell (Backend)',
-      value: true,
-    },
-    {
-      name: 'Kathryn Murphy (Backend)',
-      value: true,
-    },
-    {
-      name: 'Ronald Richards (Testing)',
-      value: true,
-    },
-  ]
+  })
+
 
   useEffect(() => {
-    let talent = homeTalents.map((talent) => {
-      return {
-        name: `${talent.user.entityName} ${talent.designation}`,
-        value: false,
-      }
-    })
-
-    setList(talent)
-  }, [homeTalents])
+    selectWorkType && selectLevel && fetchResources(`talents?perPage=1000&paymentType=${selectWorkType}&level=${selectLevel}`)
+  }, [selectWorkType, selectLevel])
 
   return (
     <div id="Price" className="py-7 md:py-14">
@@ -92,7 +50,7 @@ const SubscriptionSection = () => {
           <div className="flex flex-col gap-5 rounded-3xl justify-center items-center bg-white py-16 md:py-24 px-8 min-[425px]:px-20 md:px-[73px]">
             <div className="text-xl md:text-5xl font-bold">Calculate</div>
             <div className="flex flex-col items-center">
-              <div className="text-5xl md:text-8xl font-bold">$20.12</div>
+              <div className="text-5xl md:text-8xl font-bold">${amount}</div>
               <div className="text-sm">Price</div>
             </div>
             <div className="text-sm md:texxt-base text-grey text-center">
@@ -107,35 +65,77 @@ const SubscriptionSection = () => {
             availableOptionKey="name"
             label="Select work type"
             availableOptions={workType}
-            setOption={() => {}}
+            name="workType"
+            setOption={(e: any) => setSelectWorkType(e.target.value.value)}
           />
           <div className="flex flex-col md:flex-row gap-4 md:gap-5">
             <DropDown
               availableOptionKey="name"
               label="Resources level"
               availableOptions={level}
-              setOption={() => {}}
+              name="level"
+              setOption={(e: any) => setSelectLevel(e.target.value.value)}
             />
             <DropDown
               availableOptionKey="name"
               label="Resources size"
+              name="size"
               availableOptions={size}
-              setOption={() => {}}
+              setOption={(e: any) => setSelectSize(e.target.value.value)}
             />
           </div>
-          <div className="rounded-2xl bg-white p-5">
-            <div className="text-sm font-bold mb-4">Select Resources</div>
-            <div className="max-h-64 flex flex-col gap-2 overflow-scroll">
-              {newList.map((person, index) => (
-                <CheckBox
-                  key={index}
-                  id={`checkbox-${index}`}
-                  label={person.name}
-                  value={person.value}
-                />
-              ))}
+          {!!selectLevel && !!selectSize && !!selectWorkType && (
+            <div className="rounded-2xl bg-white p-5">
+              <div className="text-sm font-bold mb-4">Select Resources</div>
+              <div className="max-h-64 flex flex-col gap-2 overflow-scroll">
+                {!!talents &&
+                  !!talents.length ?
+                  talents.map((item, index) => (
+                    <CheckBox
+                      key={index}
+                      id={`checkbox-${index}`}
+                      label={`${item?.talent?.user?.entityName}`}
+                      value={item.checked === true ? true : false}
+                      onChange={(checked) => {
+                        let temp = talents
+                        if (checked) {
+                          if(selectSize === "SMALL") {
+                            if(numberOfTalent < 2) {
+                              temp[index].checked = true
+                              setNumberOfTalent(numberOfTalent+1)
+                              setAmount(amount + Number(item.talent.amount))
+                            } else {
+                              toast.error("Small size packge have only 2 talent.")
+                            }
+                          } else if(selectSize === "MEDIUM") {
+                            if(numberOfTalent < 5) {
+                              temp[index].checked = true
+                              setNumberOfTalent(numberOfTalent+1)
+                              setAmount(amount + Number(item.talent.amount))
+                            } else {
+                              toast.error("Medium size packge have only 5 talent.")
+                            }
+                          } else {
+                            if(numberOfTalent < 10) {
+                              temp[index].checked = true
+                              setNumberOfTalent(numberOfTalent+1)
+                              setAmount(amount + Number(item.talent.amount))
+                            } else {
+                              toast.error("Big size packge have only 10 talent.")
+                            }
+                          }
+                        } else {
+                          temp[index].checked = false
+                          setNumberOfTalent(numberOfTalent - 1)
+                          setAmount(amount - Number(item.talent.amount))
+                        }
+                        setTalents(temp)
+                      }}
+                    />
+                  )): <div>No Resources</div>}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

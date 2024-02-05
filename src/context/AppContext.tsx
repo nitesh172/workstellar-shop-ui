@@ -12,6 +12,7 @@ import { toast } from 'react-hot-toast'
 
 export type AppContextType = {
   homeTalents: TalentProps[]
+  loading: boolean
 }
 
 const AppContext: any = createContext<AppContextType>({} as AppContextType)
@@ -27,14 +28,14 @@ export const AppProvider = (props: AppProviderProps) => {
   const { children } = props
 
   const [homeTalents, setHomeTalents] = useState<TalentProps[]>([])
-  const [subTalents, setSubTalents] = useState<TalentProps[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   const { execute: fetchHomeResources } = useCaller({
     method: HttpMethod.GET,
     doneCb: (resp: TalentResponseProps) => {
       if (!resp) return
       setHomeTalents(resp.talents)
-      setSubTalents(resp.talents)
+      setLoading(false)
     },
     errorCb: (failed: any) => {
       toast.error(failed)
@@ -43,12 +44,14 @@ export const AppProvider = (props: AppProviderProps) => {
 
 
   useEffect(() => {
+    setLoading(true)
     fetchHomeResources('talents?perPage=1000')
   }, [])
 
   const defaultContext: AppContextType = {
     ...props,
     homeTalents,
+    loading
   }
 
   return (

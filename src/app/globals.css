@@ -4,8 +4,6 @@
 
 * {
   user-select: none;
-  scrollbar-width: thin;
-  scrollbar-color: var(--secondary) var(--primary);
 }
 
 /* Chrome, Edge, and Safari */
