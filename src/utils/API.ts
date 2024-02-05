@@ -20,6 +20,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '404'
           // Authorization: `Bearer ${token}`,
         },
       })
@@ -50,6 +51,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '404'
           // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
@@ -81,6 +83,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '404'
           // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
@@ -111,6 +114,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '404'
           // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
@@ -141,6 +145,7 @@ export const useAPI = ({
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '404'
           // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),

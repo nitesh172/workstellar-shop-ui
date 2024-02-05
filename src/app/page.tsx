@@ -7,7 +7,7 @@ const SubscriptionSection = dynamic(() => import('@/components/Blocks/Subscripti
 
 export default function Home() {
   return (
-    <main className="pt-1 pb-14 lg:pt-10 lg:pb-28">
+    <main className="pt-1 pb-14 lg:pt-10 lg:pb-20">
       <HeroSection />
       <ResourceSection />
       <CustomerJourney />

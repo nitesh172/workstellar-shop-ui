@@ -36,10 +36,10 @@ const Resource = ({ params }: { params: { id: string } }) => {
     <div className="py-7 md:py-14 relative">
       <div className="py-7 md:py-14">
         <div className="text-2xl md:text-4xl font-bold mb-11">Resources</div>
-        <div className="rounded-2xl border p-5 flex flex-col items-center lg:flex-row gap-8 lg:gap-[5%]">
+        <div className="rounded-2xl border p-5 flex flex-col lg:items-center lg:flex-row gap-8 lg:gap-[5%]">
           <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
             <Image
-              src="/images/person_1.svg"
+              src={`/images/${talent?.avatar}.svg`}
               width={224}
               height={270}
               className="w-32 md:w-56 h-[150px] md:h-[224px]"
@@ -49,11 +49,11 @@ const Resource = ({ params }: { params: { id: string } }) => {
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
-              <div className="flex flex-row gap-2 items-center">
+              <div className="flex flex-col md:flex-row gap-2 lg:items-center">
                 <div className="text-2xl font-bold mb-1">
                   {talent?.user?.entityName}
                 </div>
-                <div className="">
+                <div className="flex flex-col gap-2">
                   {talent?.experienceYear} years of experience |{' '}
                   {talent?.designation}
                 </div>
