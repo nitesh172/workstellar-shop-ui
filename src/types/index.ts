@@ -125,7 +125,7 @@ export type TalentProps = {
   id: string
   createdAt: string
   updatedAt: string
-  skills: {name: string}[]
+  skills: { name: string }[]
   amount: {}
   paymentType: string
   headline: string
@@ -143,3 +143,24 @@ export type TalentResponseProps = {
   currentPage: number
   totalPage: number
 }
+
+export type TranslationValuesProps = {
+  language: string
+  value: string
+}
+
+export type TranslationProps = {
+  key: string
+  translationValues: TranslationValuesProps[]
+}
+
+export type TranslationsResponseProps = TranslationProps[]
+
+export type LanguageProps = {
+  id: string
+  code: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type LanguagesResponseProps = LanguageProps[]

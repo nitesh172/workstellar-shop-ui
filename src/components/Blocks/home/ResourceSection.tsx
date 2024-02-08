@@ -12,12 +12,12 @@ const Carousel = dynamic(() => import('@/components/Carousel'))
 const ResourceSection = () => {
   const router = useRouter()
 
-  const { homeTalents, loading } = useAppContext()
+  const { homeTalents, loading, translate } = useAppContext()
 
   return (
     <div id="Resources" className="py-7 md:py-14">
       <div className="text-center text-xl md:text-4xl text-black font-bold mb-11">
-        Resources
+        {translate('_RESOURCES_', 'Resources')}
       </div>
       {!!homeTalents && !!homeTalents.length ? (
         <Carousel
@@ -58,7 +58,7 @@ const ResourceSection = () => {
                     src="images/redirect.svg"
                     alt="redirect"
                     loading="lazy"
-                    onClick={() => router.push(`/resources/1`)}
+                    onClick={() => router.push(`/resources/${talent.id}`)}
                     className="absolute md:static cursor-pointer top-4 right-4 w-4 h-4 md:h-6 md:w-6"
                     width={24}
                     height={24}
@@ -73,7 +73,7 @@ const ResourceSection = () => {
           <Lottie animationData={animationData} className="w-40" />
         </div>
       ) : (
-        <div>No Resources</div>
+        <div>{translate('_NO_RESOURCES_', 'No Resources')}</div>
       )}
     </div>
   )

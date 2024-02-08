@@ -1,45 +1,41 @@
 'use client'
 import React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { useAppContext } from '@/context/AppContext'
 
 const Menus = () => {
   const router = useRouter()
   const path = usePathname()
+  const {translate} = useAppContext()
 
   const menuList = [
     {
       id: 0,
-      name: 'Home',
+      name: translate('_HOME_', 'Home'),
       url: '/',
       scrollID: 'Home',
     },
     {
       id: 1,
-      name: 'Resources',
+      name: translate('_RESOURCES_', 'Resources'),
       url: '/resources',
       scrollID: '',
     },
     {
       id: 2,
-      name: 'Price',
+      name: translate('_PRICE_', 'Price'),
       url: '',
       scrollID: 'Price',
     },
     {
       id: 3,
-      name: 'Why us',
-      url: '/',
-      scrollID: 'Why us',
-    },
-    {
-      id: 4,
-      name: 'Testimonials',
+      name: translate('_TESTIMONIALS_', 'Testimonials'),
       url: '/',
       scrollID: 'Testimonials',
     },
     {
-      id: 6,
-      name: 'Contact us',
+      id: 4,
+      name: translate('_CONTACT_US_', 'Contact us'),
       url: '/',
       scrollID: 'Contact us',
     },

@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
-const VideoFrame = dynamic(() => import('./VideoFrame'))
+import { useAppContext } from '@/context/AppContext'
 const Carousel = dynamic(() => import('@/components/Carousel'))
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 const ScheduleMeeting = dynamic(() => import('../ScheduleMeeting'))
@@ -12,6 +12,8 @@ const PopupEncloser = dynamic(
 
 const CustomerJourney = () => {
   const [mPopup, setMPopup] = useState<boolean>(false)
+
+  const { translate } = useAppContext()
 
   const itResources = [
     'Guides the customer,',
@@ -26,14 +28,14 @@ const CustomerJourney = () => {
   return (
     <div className="py-7 md:py-14">
       <div className="text-center text-xl md:text-4xl text-black font-bold mb-11">
-        Easy & valuable customer journey
+        {translate('_CUSTOMER_JOURNEY_HEADING_', 'Easy & valuable customer journey')}
       </div>
       <div className="flex flex-col gap-12 md:gap-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-8">
           <div className='w-full h-[569px] bg-[url("/images/cus_jou_block_m_1.svg")] md:bg-[url("/images/cus_jou_block_d_1.svg")] lg:bg-[url("/images/cus_jou_block_m_1.svg")] xl:bg-[url("/images/cus_jou_block_d_1.svg")] bg-cover flex flex-col gap-6 rounded-3xl p-6 bg-no-repeat'>
             <div className="bg-white w-full p-6 flex flex-col gap-6 rounded-2xl">
               <div className="font-semibold md:text-2xl">
-                Do you need an IT resource to your business
+                {translate('_IT_RESOURCES_TEXT_', 'Do you need an IT resource to your business')}
               </div>
               <div className="flex flex-col gap-2">
                 {itResources.map((resources, i) => (
@@ -41,7 +43,7 @@ const CustomerJourney = () => {
                     <Image
                       src="/images/checkbox.svg"
                       width={24}
-                      loading='lazy'
+                      loading="lazy"
                       height={24}
                       alt="checkbox"
                       className="w-6 h-6"
@@ -69,7 +71,7 @@ const CustomerJourney = () => {
             />
             <div className="bg-white w-full p-6 flex flex-col gap-6 rounded-2xl">
               <div className="font-semibold md:text-2xl">
-                Do you need help with an IT project, app etc.
+                {translate('_IT_PROJECT_TEXT_', 'Do you need help with an IT project, app etc.')}
               </div>
               <div className="flex flex-col gap-2">
                 {itResources.map((resources, i) => (
@@ -78,7 +80,7 @@ const CustomerJourney = () => {
                       src="/images/checkbox.svg"
                       width={24}
                       height={24}
-                      loading='lazy'
+                      loading="lazy"
                       alt="checkbox"
                       className="w-6 h-6"
                     />
@@ -97,7 +99,7 @@ const CustomerJourney = () => {
         >
           <div className="flex-1 w-full xl:w-1/2">
             <div className="font-pacifico text-3xl md:text-4xl text-center mb-6 text-white">
-              Testimonies
+              {translate('_TESTIMONIES_', 'Testimonies')}
             </div>
             <Carousel
               data={testimonials}
@@ -106,7 +108,7 @@ const CustomerJourney = () => {
                   key={i}
                   className={`flex-shrink-0 ${
                     isSnapPoint && 'snap-start'
-                  } w-full md:w-1/2 flex flex-col pl-2 pr-2 gap-2`}
+                  } w-full lg:w-1/2 xl:w-1/3 flex flex-col pl-2 pr-2 gap-2`}
                 >
                   <div className="bg-white p-6 rounded-xl flex flex-col gap-3.5">
                     <div className="text-sm font-bold text-black">
@@ -133,10 +135,6 @@ const CustomerJourney = () => {
               )}
             />
           </div>
-          <VideoFrame
-            id="Why us"
-            className="flex-1 w-full flex flex-col gap-0.5"
-          />
         </div>
       </div>
       <PopupEncloser show={mPopup} close={handlePopup}>

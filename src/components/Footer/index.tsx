@@ -6,27 +6,34 @@ import BrandLogo from '../Blocks/BrandLogo'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { socialLink } from '@/utils/config'
+import { useAppContext } from '@/context/AppContext'
 
 const Footer = () => {
   const router = useRouter()
+  const { translate } = useAppContext()
+
   return (
     <div className="px-8 md:px-16 lg:px-20 xl:px-24 min-[1920px]:px-60 py-6 md:pt-20 md:pb-12 bg-footerbg">
       <div className="flex flex-col gap-10 items-start md:items-center lg:flex-row justify-between mb-10 md:mb-20">
         <Menus />
-        <Button text="Hire resource" onClick={() => router.push("/resources")} className="px-5" />
+        <Button
+          text={translate('_HIRE_RESOURCE_', 'Hire resource')}
+          onClick={() => router.push('/resources')}
+          className="px-5"
+        />
       </div>
       <div className="flex flex-col items-start md:items-center gap-8 mb-10 md:mb-20">
         <BrandLogo />
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2.5 items-center justify-start md:justify-center">
             {socialLink.map((link, index) => (
-              <a key={index} href={link.link} target='_blank'>
+              <a key={index} href={link.link} target="_blank">
                 <Image
                   src={link.image}
                   className="w-[42px] h-[42px] cursor-pointer"
                   width={42}
                   height={42}
-                  loading='lazy'
+                  loading="lazy"
                   alt="social-link"
                 />
               </a>
@@ -40,8 +47,8 @@ const Footer = () => {
       </div>
       <div className="flex flex-col gap-10 md:flex-row justify-between">
         <div className="flex flex-col md:flex-row gap-6">
-          <div>Terms and service</div>
-          <div>Privacy policy</div>
+          <div>{translate('_TERM_AND_SERVICES_', 'Terms and services')}</div>
+          <div>{translate('_PRIVACY_POLICY_', 'Privacy policy')}</div>
         </div>
         <div>© {new Date().getFullYear()} WORKSTELLAR</div>
       </div>

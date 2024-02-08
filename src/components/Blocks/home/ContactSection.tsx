@@ -9,16 +9,19 @@ import {
   timeperiod,
 } from '@/utils/config'
 import { useFormik } from 'formik'
-import { ContactFormSchema } from '@/utils/config/schemas'
 import { useCaller } from '@/utils/API'
 import { HttpMethod } from '@/types'
 import toast from 'react-hot-toast'
+import { useAppContext } from '@/context/AppContext'
+import { object, string } from 'yup'
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 const TextField = dynamic(() => import('@/components/Input/TextField'))
 const DropDown = dynamic(() => import('@/components/Dropdown/Dropdown'))
 const ContactDetailWithForm = dynamic(() => import('../ContactDetailWithForm'))
 
 const ContactSection = () => {
+  const { translate } = useAppContext()
+
   const { execute: createRequest } = useCaller({
     method: HttpMethod.POST,
     doneCb: (resp: any) => {
@@ -30,6 +33,51 @@ const ContactSection = () => {
       toast.error(failed)
       setSubmitting(false)
     },
+  })
+
+  const ContactFormSchema = object({
+    fullName: string()
+      .required(translate('_FULL_NAME_ERROR_', 'Full name is required'))
+      .matches(
+        /^[a-zA-Z0-9 .ÆØÅæøå]{1,40}$/,
+        translate('_INVALID_CHARTER_ERROR_', 'Invalid characters used')
+      )
+      .max(30, 'Exceeding maximum character limit'),
+    email: string()
+      .required(translate('_EMAIL_REQUIRED_ERROR_', 'Email is required'))
+      .email(translate('_INVALID_EMAIL_ERROR_', 'Invalid email format')),
+    phoneNumber: string()
+      .required(
+        translate('_PHONE_NUMBER_REQUIRED_ERROR_', 'Phone Number is required')
+      )
+      .matches(
+        /(^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$)|(^[0-9]{10,11}$)|(^\+[0-9]{1,3} [0-9]{10,11}$)/,
+        translate('_INVALID_PHONE_NUMBER_ERROR_', 'Invalid phone number format')
+      ),
+    clientType: string().required(
+      translate('_CLIENT_TYPE_REQUIRED_ERROR_', 'Client type is required')
+    ),
+    companyName: string().required(
+      translate('_COMPANY_NAME_REQUIRED_ERROR_', 'Company Name is required')
+    ),
+    skills: string().required(
+      translate('_SKILLS_REQUIRED_ERROR_', 'Please enter skills')
+    ),
+    commitment: string().required(
+      translate('_COMMITMENT_REQUIRED_ERROR_', 'Please select commitment')
+    ),
+    onboardPeriod: string().required(
+      translate(
+        '_ONBOARD_PERIOD_REQUIRED_ERROR_',
+        'Please select onboard period'
+      )
+    ),
+    projectPeriod: string().required(
+      translate(
+        '_PROJECT_PERIOD_REQUIRED_ERROR_',
+        'Please select project period'
+      )
+    ),
   })
 
   const {
@@ -56,8 +104,8 @@ const ContactSection = () => {
         className="rounded-3xl border p-5 md:p-10 flex flex-col gap-6"
       >
         <TextField
-          label="Full name"
-          placeholder="Name"
+          label={translate('_FULL_NAME_', 'Full name')}
+          placeholder={translate('_NAME_', 'Name')}
           name="fullName"
           value={values}
           error={errors}
@@ -67,8 +115,8 @@ const ContactSection = () => {
         />
         <div className="flex flex-col xl:flex-row gap-6">
           <TextField
-            label="Phone number"
-            placeholder="Number"
+            label={translate('_PHONE_NUMBER_', 'Phone number')}
+            placeholder={translate('_NUMBER_', 'Number')}
             className="flex-1"
             name="phoneNumber"
             value={values}
@@ -78,8 +126,8 @@ const ContactSection = () => {
             onBlur={handleBlur}
           />
           <TextField
-            label="Mail ID"
-            placeholder="Mail ID"
+            label={translate('_MAIL_ID_', 'Mail ID')}
+            placeholder={translate('_MAIL_ID_', 'Mail ID')}
             className="flex-1"
             name="email"
             value={values}
@@ -94,7 +142,7 @@ const ContactSection = () => {
             availableOptionKey="name"
             primary
             className="flex-1"
-            label="Select type"
+            label={translate('_SELECT_TYPE_', 'Select type')}
             availableOptions={clientType}
             selectOptionKey="value"
             setOption={handleChange}
@@ -105,7 +153,7 @@ const ContactSection = () => {
             onBlur={handleBlur}
           />
           <TextField
-            label="Company Name"
+            label={translate('_COMPANY_NAME_', 'Company Name')}
             placeholder="Vector Company"
             className="flex-1"
             name="companyName"
@@ -120,7 +168,10 @@ const ContactSection = () => {
           availableOptionKey="name"
           primary
           className="flex-1"
-          label="How long will the project last"
+          label={translate(
+            '_HOW_LONG_PROJECT_',
+            'How long will the project last'
+          )}
           selectOptionKey="value"
           availableOptions={projectPeriod}
           setOption={handleChange}
@@ -133,7 +184,10 @@ const ContactSection = () => {
           onBlur={handleBlur}
         />
         <TextField
-          label="Choose type of skills you need"
+          label={translate(
+            '_CHOOSE_SKILL_TYPE_NEED_',
+            'What type of skills do you need?'
+          )}
           placeholder="React Native"
           name="skills"
           value={values}
@@ -145,7 +199,7 @@ const ContactSection = () => {
         <DropDown
           availableOptionKey="name"
           primary
-          label="What commitment do you need"
+          label={translate('_COMMITMENT_NEED_', 'What commitment do you need?')}
           availableOptions={commitmentType}
           setOption={handleChange}
           selectOptionKey="value"
@@ -160,7 +214,10 @@ const ContactSection = () => {
         <DropDown
           availableOptionKey="name"
           primary
-          label="When should your new member of the team start?"
+          label={translate(
+            '_WHEN_START_TEXT_',
+            'When should your new member of the team start?'
+          )}
           availableOptions={timeperiod}
           setOption={handleChange}
           name="onboardPeriod"
@@ -172,7 +229,12 @@ const ContactSection = () => {
           touched={touched}
           onBlur={handleBlur}
         />
-        <Button text="Submit" type="submit" submitLoading={isSubmitting} dark />
+        <Button
+          text={translate('_SUBMIT_', 'Submit')}
+          type="submit"
+          submitLoading={isSubmitting}
+          dark
+        />
       </form>
     </ContactDetailWithForm>
   )

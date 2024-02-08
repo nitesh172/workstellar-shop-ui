@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useOnClickOutside } from '@/hooks/useOutsideClick'
 import { DropDownProps } from '@/types'
 import Image from 'next/image'
+import { useAppContext } from '@/context/AppContext'
 
 const DropDown: React.FC<DropDownProps> = (props) => {
   const {
@@ -20,10 +21,12 @@ const DropDown: React.FC<DropDownProps> = (props) => {
     className,
     primary,
     selectOptionKey,
-    touched
+    touched,
   } = props
 
   const [showDropDownOptions, setShowDropDownOptions] = useState(false)
+
+  const { translate } = useAppContext()
 
   const classes = () => {
     if (!isInvalid) return `placeholder:text-[#5E605E] text-[#5E605E]`
@@ -83,8 +86,8 @@ const DropDown: React.FC<DropDownProps> = (props) => {
           </div>
           <div className="text-sm capitalize text-black">
             {newOption && availableOptionKey && Object.keys(newOption)
-              ? (newOption[availableOptionKey])?.toString().toLowerCase()
-              : newOption || 'Select'}
+              ? newOption[availableOptionKey]?.toString().toLowerCase()
+              : newOption || translate('_SELECT_', 'Select')}
           </div>
         </div>
         <Image
@@ -119,13 +122,25 @@ const DropDown: React.FC<DropDownProps> = (props) => {
                   key={`available-option-${index}`}
                   onClick={() => {
                     setNewOption(availableOption)
-                    setOption({target: {name: name, value: selectOptionKey ? availableOption[selectOptionKey] : availableOption}})
+                    setOption({
+                      target: {
+                        name: name,
+                        value: selectOptionKey
+                          ? availableOption[selectOptionKey]
+                          : availableOption,
+                      },
+                    })
                   }}
                   className={`py-3 p-5 hover:bg-[#e7e7e8] bg-white w-full flex flex-row gap-3 items-center`}
                 >
                   <div className="truncate">
                     {availableOptionKey && Object.keys(availableOption)
-                      ? availableOption[availableOptionKey]
+                      ? !!availableOption?.key
+                        ? translate(
+                            availableOption['key'],
+                            availableOption[availableOptionKey]
+                          )
+                        : availableOption[availableOptionKey]
                       : availableOption}
                   </div>
                 </div>
@@ -135,7 +150,7 @@ const DropDown: React.FC<DropDownProps> = (props) => {
                 key={`available-option-none`}
                 className={`py-4 px-4 bg-white hover:bg-[#DEDEEE]`}
               >
-                No data found
+                {translate('_NO_DATA_FOUND_', 'No data found')}
               </div>
             )}
           </div>
