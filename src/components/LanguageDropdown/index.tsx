@@ -41,9 +41,10 @@ const LanguageDropdown = () => {
         >
           {!!languages &&
             !!languages.length &&
-            languages.map((language) => {
+            languages.map((language, index) => {
               return (
                 <div
+                  key={language.id}
                   className="flex flex-row gap-2 p-2 px-2.5 hover:bg-gray-200 cursor-pointer"
                   onClick={() => {
                     setLang(language.code)

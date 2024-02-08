@@ -109,6 +109,8 @@ export const AppProvider = (props: AppProviderProps) => {
       fetchLanguages('translation/languages/all')
       fetchTranslations('translation')
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
