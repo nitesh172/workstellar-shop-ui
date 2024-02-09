@@ -44,8 +44,8 @@ export const Pagination = () => {
 
   return (
     <div className={`w-full mb-3`}>
-      <div className="flex justify-between gap-6 items-center sm:flex-row flex-col py-2">
-        <div className="flex flex-row gap-4 items-center">
+      <div className="flex justify-between gap-6 items-center flex-col md:flex-row py-2">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-4 items-center">
           <div className={`text-dShadeOne text-sm`}>
             Showing {limit * (page - 1) + 1} - {calculateLimit()} of{' '}
             {totalCount} results

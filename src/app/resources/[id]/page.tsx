@@ -10,7 +10,7 @@ const Resource = ({ params }: { params: { id: string } }) => {
   const { id } = params
 
   return (
-    <div className="py-7 md:py-14 relative">
+    <div className="pb-7 md:pb-14 relative">
       <ResourcePage id={id} />
       <SubscriptionSection />
     </div>

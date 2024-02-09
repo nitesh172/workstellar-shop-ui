@@ -102,11 +102,11 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      <div className='flex flex-row gap-4'>
+      <div className='flex flex-col-reverse md:flex-row gap-4 items-center self-center'>
         <LanguageDropdown />
         <Button
           text={translate('_HIRE_RESOURCE_', 'Hire resource')}
-          className="self-center px-5"
+          className="px-5"
           onClick={() => router.push('/resources')}
         />
       </div>

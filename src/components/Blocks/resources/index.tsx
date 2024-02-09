@@ -63,7 +63,7 @@ const ResourceMainPage = () => {
         <TextField
           label={translate('_SEARCH_', 'Search')}
           placeholder={translate('_SEARCH_', 'Search')}
-          className="w-full md:w-96"
+          className="w-full md:w-96 py-0"
           onkeyPressed={() => setSearch(true)}
           onChange={(e) => {
             if (e.target.value === '') {
@@ -94,7 +94,7 @@ const ResourceMainPage = () => {
                       ? setWorkFilter('')
                       : setWorkFilter(type.value)
                   }
-                  className={`rounded-3xl cursor-pointer border border-black hover:bg-black hover:text-white py-2 px-4 ${
+                  className={`rounded-3xl cursor-pointer border text-sm border-black hover:bg-black hover:text-white py-2 px-4 ${
                     workFilter === type.value
                       ? 'bg-black text-white'
                       : 'bg-transparent'
@@ -118,7 +118,7 @@ const ResourceMainPage = () => {
                       ? setLevelFilter('')
                       : setLevelFilter(level.value)
                   }
-                  className={`rounded-3xl cursor-pointer border border-black hover:bg-black hover:text-white py-2 px-4 ${
+                  className={`rounded-3xl cursor-pointer border text-sm border-black hover:bg-black hover:text-white py-2 px-4 ${
                     levelFilter === level.value
                       ? 'bg-black text-white'
                       : 'bg-transparent'
@@ -141,13 +141,13 @@ const ResourceMainPage = () => {
                   inx % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
                 }`}
               >
-                <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
+                <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[16px] pt-4 md:pt-9">
                   <Image
                     src={`/images/${talent.avatar}.png`}
-                    width={224}
-                    height={270}
+                    width={1200}
+                    height={800}
                     loading="lazy"
-                    className="w-32 md:w-56 h-[150px] md:h-[224px]"
+                    className="w-36 md:w-56 h-[150px] md:h-[224px]"
                     alt="person_image"
                   />
                 </div>

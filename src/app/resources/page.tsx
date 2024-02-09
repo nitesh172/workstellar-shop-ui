@@ -7,7 +7,7 @@ const ResourceMainPage = dynamic(() => import('@/components/Blocks/resources'))
 
 const Resources = () => {
   return (
-    <div className="py-7 md:py-14 relative">
+    <div className="pb-7 md:pb-8 relative">
       <PaginationProvider>
         <ResourceProvider>
           <ResourceMainPage />

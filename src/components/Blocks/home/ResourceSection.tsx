@@ -34,13 +34,13 @@ const ResourceSection = () => {
                   i % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
                 }`}
               >
-                <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
+                <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] pt-4 md:pt-9">
                   <Image
                     src={`/images/${talent.avatar}.png`}
-                    width={224}
-                    height={270}
+                    width={1200}
+                    height={800}
                     loading="lazy"
-                    className="w-32 md:w-56 h-[150px] md:h-[224px]"
+                    className="w-36 md:w-56 h-[150px] md:h-[224px]"
                     alt="person_image"
                   />
                 </div>

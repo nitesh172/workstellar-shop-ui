@@ -3,7 +3,9 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { useAppContext } from '@/context/AppContext'
-import ReactStars from 'react-stars'
+// import ReactStars from 'react-stars'
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 const Carousel = dynamic(() => import('@/components/Carousel'))
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 const ScheduleMeeting = dynamic(() => import('../ScheduleMeeting'))
@@ -88,14 +90,14 @@ const CustomerJourney = () => {
             </div>
             <Button
               onClick={handlePopup}
-              text="Let’s talk"
+              text={translate('_LET_TALK_', 'Let’s talk')}
               className="rounded-[40px] rounded-tl-none"
               dark
             />
           </div>
           <div className='w-full h-[569px] bg-[url("/images/cus_jou_block_m_2.svg")] md:bg-[url("/images/cus_jou_block_d_2.svg")] lg:bg-[url("/images/cus_jou_block_m_2.svg")] xl:bg-[url("/images/cus_jou_block_d_2.svg")] bg-cover flex flex-col justify-end gap-6 rounded-3xl p-6 bg-no-repeat'>
             <Button
-              text="Let’s talk"
+              text={translate('_LET_TALK_', 'Let’s talk')}
               onClick={handlePopup}
               className="rounded-[40px] rounded-tl-none"
               dark
@@ -150,7 +152,14 @@ const CustomerJourney = () => {
                         GURANTEEPIVOT
                       </div>
                       <div className="flex flex-row gap-2 items-center">
-                        <div className='text-xs font-bold text-black'>4.2</div><ReactStars count={5} value={4.2} size={20} edit={false} />
+                        <div className="text-xs font-bold text-black">4.2</div>
+                        {/* <ReactStars
+                          count={5}
+                          value={4.2}
+                          size={20}
+                          edit={false}
+                        /> */}
+                        <Rating style={{ maxWidth: 100 }} value={2.1} readOnly />
                       </div>
                     </div>
                     <div className="text-sm text-grey">

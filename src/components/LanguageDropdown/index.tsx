@@ -17,7 +17,7 @@ const LanguageDropdown = () => {
   useOnClickOutside(ref, handleClickOutside)
 
   let [trigger, container] = usePopper({
-    placement: 'bottom-end',
+    placement: 'bottom',
     strategy: 'fixed',
     modifiers: [{ name: 'offset', options: { offset: [0, 8] } }],
   })
@@ -25,7 +25,7 @@ const LanguageDropdown = () => {
   return (
     <div
       ref={ref}
-      className="flex flex-row gap-2 text-sm items-center relative z-50"
+      className="flex flex-row gap-2 text-sm items-center relative z-10"
     >
       <div
         ref={trigger}
