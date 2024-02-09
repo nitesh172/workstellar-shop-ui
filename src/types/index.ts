@@ -12,12 +12,12 @@ export type ButtonProps = {
   submitLoading?: boolean
   isDisabled?: boolean
   dark?: boolean
+  small?: boolean
 }
 
 export type VideoFrameProps = {
   id?: string
   className?: string
-  autoplay?: boolean
 }
 
 export type TextFieldProps = {
@@ -138,7 +138,7 @@ export type TalentProps = {
 
 export type TalentResponseProps = {
   talents: TalentProps[]
-  total: number
+  totalItems: number
   perPage: number
   currentPage: number
   totalPage: number
@@ -164,3 +164,8 @@ export type LanguageProps = {
 }
 
 export type LanguagesResponseProps = LanguageProps[]
+
+export enum Order {
+  DESC = 'DESC',
+  ASC = 'ASC',
+}

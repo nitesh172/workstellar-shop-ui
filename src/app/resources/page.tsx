@@ -1,11 +1,18 @@
 import SubscriptionSection from '@/components/Blocks/SubscriptionSection'
-import ResourceMainPage from '@/components/Blocks/resources'
+import { PaginationProvider } from '@/context/PaginationContext'
+import { ResourceProvider } from '@/context/ResourceContext'
+import dynamic from 'next/dynamic'
 import React from 'react'
+const ResourceMainPage = dynamic(() => import('@/components/Blocks/resources'))
 
 const Resources = () => {
   return (
     <div className="py-7 md:py-14 relative">
-      <ResourceMainPage />
+      <PaginationProvider>
+        <ResourceProvider>
+          <ResourceMainPage />
+        </ResourceProvider>
+      </PaginationProvider>
       <SubscriptionSection />
     </div>
   )

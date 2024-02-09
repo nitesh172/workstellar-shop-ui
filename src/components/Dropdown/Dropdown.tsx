@@ -86,7 +86,12 @@ const DropDown: React.FC<DropDownProps> = (props) => {
           </div>
           <div className="text-sm capitalize text-black">
             {newOption && availableOptionKey && Object.keys(newOption)
-              ? newOption[availableOptionKey]?.toString().toLowerCase()
+              ? !!newOption?.key
+              ? translate(
+                newOption['key'],
+                newOption[availableOptionKey]?.toString().toLowerCase()
+                )
+              : newOption[availableOptionKey]?.toString().toLowerCase()
               : newOption || translate('_SELECT_', 'Select')}
           </div>
         </div>

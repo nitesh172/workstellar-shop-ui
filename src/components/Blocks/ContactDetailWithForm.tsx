@@ -11,15 +11,15 @@ const ContactDetailWithForm: React.FC<ContactDetailWithFormProps> = (props) => {
   const options = [
     {
       title: translate('_CALL_US_','Call us'),
-      value: '+45 12 34 56 78',
+      value: '+45 27853598',
     },
     {
       title: translate('_MAIL_US_ON_','Mail us on'),
-      value: 'Info@gmail.com',
+      value: 'hello@workstellar.com',
     },
     {
       title: translate('_WHATSAPP_US_','Whatsapp us'),
-      value: '+45 20 30 40 50',
+      value: '+45 27853598',
     },
   ]
 

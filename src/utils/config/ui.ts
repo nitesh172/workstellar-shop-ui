@@ -1,22 +1,3 @@
-export const socialLink = [
-  {
-    image: '/images/instagram.svg',
-    link: 'https://www.instagram.com',
-  },
-  {
-    image: '/images/facebook.svg',
-    link: 'www.facebook.com',
-  },
-  {
-    image: '/images/twitter.svg',
-    link: 'www.twitter.com',
-  },
-  {
-    image: '/images/pintrest.svg',
-    link: 'www.pintrest.com',
-  },
-]
-
 export let workType = [
   {
     name: 'Hourly',

@@ -1,47 +1,40 @@
 'use client'
 import TextField from '@/components/Input/TextField'
+import { Pagination } from '@/components/Pagination'
 import { useAppContext } from '@/context/AppContext'
-import { HttpMethod, TalentProps, TalentResponseProps } from '@/types'
-import { useCaller } from '@/utils/API'
+import { usePaginationContext } from '@/context/PaginationContext'
+import { useResourceContext } from '@/context/ResourceContext'
 import { levels, workType } from '@/utils/config'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+const LottieAnimation = dynamic(() => import('../LottieAnimation'))
 
 const ResourceMainPage = () => {
   const router = useRouter()
   const { translate } = useAppContext()
+  const { fetchResources, talents, loading } = useResourceContext()
   const [filter, setFilter] = useState<boolean>(false)
-  const [talent, setTalent] = useState<TalentProps[]>([])
 
   const [workFilter, setWorkFilter] = useState<string>('')
   const [levelFilter, setLevelFilter] = useState<string>('')
   const [search, setSearch] = useState<boolean>(false)
   const [searchText, setSearchText] = useState<string>('')
 
-  const { execute: fetchResources } = useCaller({
-    method: HttpMethod.GET,
-    doneCb: (resp: TalentResponseProps) => {
-      if (!resp) return
-      setTalent(resp.talents)
-    },
-    errorCb: (failed: any) => {
-      toast.error(failed)
-    },
-  })
+  const { page, limit } = usePaginationContext()
 
   useEffect(() => {
     fetchResources(
-      `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}`
+      `talents?perPage=${limit}&currentPage=${page}&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}&mode=USER_SITE`
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workFilter, levelFilter])
+  }, [workFilter, levelFilter, limit, page])
 
   useEffect(() => {
     if (searchText && search) {
       fetchResources(
-        `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}`
+        `talents?perPage=${limit}&currentPage=${page}&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}&mode=USER_SITE`
       )
       setSearch(false)
     }
@@ -75,7 +68,7 @@ const ResourceMainPage = () => {
           onChange={(e) => {
             if (e.target.value === '') {
               fetchResources(
-                `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}`
+                `talents?perPage=100&paymentType=${workFilter}&level=${levelFilter}&mode=USER_SITE`
               )
             }
             setSearchText(e.target.value)
@@ -138,44 +131,56 @@ const ResourceMainPage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 min-[425px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-7">
-        {talent.map((talent, inx) => (
-          <div
-            key={talent.id}
-            className={`rounded-xl relative border p-3 md:p-5 flex gap-3 md:gap-6 ${
-              inx % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
-            }`}
-          >
-            <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
-              <Image
-                src={`/images/${talent.avatar}.svg`}
-                width={224}
-                height={270}
-                className="w-32 md:w-56 h-[150px] md:h-[224px]"
-                alt="person_image"
-              />
-            </div>
-            <div className="flex flex-row items-center justify-between">
-              <div>
-                <div className="text-base md:text-xl font-medium text-black">
-                  {talent.user.entityName}
+      {!!talents && !!talents.length ? (
+        <div className='flex flex-col gap-5'>
+          <div className="grid grid-cols-1 min-[425px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-7">
+            {talents.map((talent, inx) => (
+              <div
+                key={talent.id}
+                className={`rounded-xl relative border p-3 md:p-5 flex gap-3 md:gap-6 ${
+                  inx % 2 === 0 ? 'flex-col' : 'flex-col md:flex-col-reverse'
+                }`}
+              >
+                <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
+                  <Image
+                    src={`/images/${talent.avatar}.png`}
+                    width={224}
+                    height={270}
+                    loading="lazy"
+                    className="w-32 md:w-56 h-[150px] md:h-[224px]"
+                    alt="person_image"
+                  />
                 </div>
-                <div className="text-sm font-medium text-grey">
-                  {talent.designation}
+                <div className="flex flex-row items-center justify-between">
+                  <div>
+                    <div className="text-base md:text-xl font-medium text-black">
+                      {talent.user.entityName}
+                    </div>
+                    <div className="text-sm font-medium text-grey">
+                      {talent.designation}
+                    </div>
+                  </div>
+                  <Image
+                    src="/images/redirect.svg"
+                    alt="redirect"
+                    onClick={() => router.push(`/resources/${talent.id}`)}
+                    className="cursor-pointer absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6"
+                    width={24}
+                    height={24}
+                  />
                 </div>
               </div>
-              <Image
-                src="/images/redirect.svg"
-                alt="redirect"
-                onClick={() => router.push(`/resources/${talent.id}`)}
-                className="cursor-pointer absolute md:static top-4 right-4 w-4 h-4 md:h-6 md:w-6"
-                width={24}
-                height={24}
-              />
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+          <Pagination />
+        </div>
+      ) : !!loading ? (
+        <div className="flex flex-col items-center justify-center h-[500px] w-full">
+          <LottieAnimation />
+        </div>
+      ) : (
+        <div>{translate('_NO_RESOURCES_', 'No Resources')}</div>
+      )}
     </div>
   )
 }

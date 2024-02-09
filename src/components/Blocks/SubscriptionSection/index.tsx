@@ -45,7 +45,7 @@ const SubscriptionSection = () => {
     selectWorkType &&
       selectLevel &&
       fetchResources(
-        `talents?perPage=1000&paymentType=${selectWorkType}&level=${selectLevel}`
+        `talents?perPage=1000&paymentType=${selectWorkType}&level=${selectLevel}&mode=USER_SITE`
       )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectWorkType, selectLevel])

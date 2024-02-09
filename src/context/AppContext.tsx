@@ -45,7 +45,7 @@ export const AppProvider = (props: AppProviderProps) => {
   const [translations, setTranslations] = useState<TranslationProps[]>([])
   const [languages, setLanguages] = useState<LanguageProps[]>([])
   const [lang, setLang] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const initialized = useRef(false)
   const [action, setAction] = useState<boolean>(false)
 
@@ -114,8 +114,7 @@ export const AppProvider = (props: AppProviderProps) => {
   }, [])
 
   useEffect(() => {
-    setLoading(true)
-    fetchHomeResources('talents?perPage=1000')
+    fetchHomeResources('talents?perPage=1000&mode=USER_SITE')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

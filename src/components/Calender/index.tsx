@@ -53,6 +53,7 @@ const Calender: React.FC<{ onChange: Function }> = (props) => {
 
   useEffect(() => {
     onChange(selectedDay)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay])
 
   return (

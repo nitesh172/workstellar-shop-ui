@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { useAppContext } from '@/context/AppContext'
 import { TalentProps } from '@/types'
-import animationData from '../../../../public/loader/Loader.json'
-import Lottie from 'lottie-react'
 const Carousel = dynamic(() => import('@/components/Carousel'))
+const LottieAnimation = dynamic(() => import('../LottieAnimation'))
 
 const ResourceSection = () => {
   const router = useRouter()
@@ -37,7 +36,7 @@ const ResourceSection = () => {
               >
                 <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
                   <Image
-                    src={`/images/${talent.avatar}.svg`}
+                    src={`/images/${talent.avatar}.png`}
                     width={224}
                     height={270}
                     loading="lazy"
@@ -70,7 +69,7 @@ const ResourceSection = () => {
         />
       ) : !!loading ? (
         <div className="flex flex-col items-center justify-center">
-          <Lottie animationData={animationData} className="w-40" />
+          <LottieAnimation />
         </div>
       ) : (
         <div>{translate('_NO_RESOURCES_', 'No Resources')}</div>

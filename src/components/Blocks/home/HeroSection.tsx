@@ -22,17 +22,24 @@ const HeroSection = () => {
           {translate('_TAG_LINE_', 'Transform Ideas into Digital Excellence')}
         </div>
         <div className="text-2xl md:text-3xl lg:text-5xl font-bold lg:leading-[65.37px]">
-          {translate('_HEAD_LINE_', 'Empower Your Vision, Elevate Your Presence: Where Creativity Meets Code!')}
+          {translate(
+            '_HEAD_LINE_',
+            'Empower Your Vision, Elevate Your Presence: Where Creativity Meets Code!'
+          )}
         </div>
         <div className="text-base md:text-lg lg:text-xl text-grey">
-          {translate('_HEAD_DESCRIPTION_', 'Empower your digital vision with top-tier developers and designers. Elevate your online presence effortlessly.')}
+          {translate(
+            '_HEAD_DESCRIPTION_',
+            'Empower your digital vision with top-tier developers and designers. Elevate your online presence effortlessly.'
+          )}
         </div>
-        <Button text={translate('_LET_TALK_', "Let’s talk")} dark onClick={handlePopup} />
+        <Button
+          text={translate('_LET_TALK_', 'Let’s talk')}
+          dark
+          onClick={handlePopup}
+        />
       </div>
-      <VideoFrame
-        autoplay
-        className="w-full xl:w-[87%] flex flex-col gap-0.5"
-      />
+      <VideoFrame className="w-full xl:w-[87%] flex flex-col gap-0.5" />
       <PopupEncloser show={mPopup} close={handlePopup}>
         <ScheduleMeeting />
       </PopupEncloser>

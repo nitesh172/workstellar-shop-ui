@@ -36,7 +36,7 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
       <div className="rounded-2xl border p-5 flex flex-col lg:items-center lg:flex-row gap-8 lg:gap-[5%]">
         <div className="bg-imagebg flex justify-center bg-opacity-20 rounded-[10px] px-3.5 md:px-7 pt-4 md:pt-9">
           <Image
-            src={`/images/${talent?.avatar}.svg`}
+            src={`/images/${talent?.avatar}.png`}
             width={224}
             height={270}
             className="w-32 md:w-56 h-[150px] md:h-[224px]"

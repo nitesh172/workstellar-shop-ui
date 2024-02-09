@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 const HeroSection = dynamic(() => import('@/components/Blocks/home/HeroSection'))
-const ResourceSection = dynamic(() => import('@/components/Blocks/home/ResourceSection'), { ssr: false })
+const ResourceSection = dynamic(() => import('@/components/Blocks/home/ResourceSection'))
 const CustomerJourney = dynamic(() => import('@/components/Blocks/home/CustomerJourney'))
 const ContactSection = dynamic(() => import('@/components/Blocks/home/ContactSection'))
 const SubscriptionSection = dynamic(() => import('@/components/Blocks/SubscriptionSection'))
