@@ -60,7 +60,7 @@ const CustomerJourney = () => {
       role: 'Client',
       review_rating: 5,
       review_comment:
-      "We've been using Workstellar's services for over a year now, and we're extremely satisfied with the quality of talent they provide. The developers and designers they've supplied have been instrumental in helping us achieve our project milestones efficiently. Highly recommend!",
+        "We've been using Workstellar's services for over a year now, and we're extremely satisfied with the quality of talent they provide. The developers and designers they've supplied have been instrumental in helping us achieve our project milestones efficiently. Highly recommend!",
     },
     {
       name: 'Digital Dynamics Ltd.',
@@ -200,7 +200,10 @@ const CustomerJourney = () => {
                   <div className="bg-white p-6 h-full rounded-xl flex flex-col gap-3.5">
                     <div className="flex flex-col">
                       <div className="text-sm font-bold text-black">
-                        GURANTEEPIVOT
+                        {testimonial.name}
+                      </div>
+                      <div className="text-xs text-grey">
+                        {testimonial.role}
                       </div>
                       <div className="flex flex-row gap-2 items-center">
                         <div className="text-xs font-bold mt-0.5 text-black">
@@ -219,14 +222,14 @@ const CustomerJourney = () => {
                       </span> */}
                       {testimonial.review_comment}
                     </div>
-                    <div className="flex flex-col gap-1">
+                    {/* <div className="flex flex-col gap-1">
                       <div className="text-xs font-medium">
                         {testimonial.name}
                       </div>
                       <div className="text-xs text-grey">
                         {testimonial.role}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
