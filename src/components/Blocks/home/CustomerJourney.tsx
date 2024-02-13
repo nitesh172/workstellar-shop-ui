@@ -47,7 +47,50 @@ const CustomerJourney = () => {
     },
   ]
 
-  const testimonials = [1, 2, 3, 4, 5, 6, 7]
+  const testimonials = [
+    {
+      name: 'Alexandre Dubois',
+      role: 'Frontend Developer',
+      review_rating: 5,
+      review_comment:
+        'Working with Workstellar has been a positive experience overall. The platform provides access to interesting projects, and the payment process is smooth. However, there were a few instances where communication with clients could have been improved, leading to minor misunderstandings. Nonetheless, I appreciate the opportunities Workstellar has provided me.',
+    },
+    {
+      name: 'Tech Innovations Inc.',
+      role: 'Client',
+      review_rating: 5,
+      review_comment:
+      "We've been using Workstellar's services for over a year now, and we're extremely satisfied with the quality of talent they provide. The developers and designers they've supplied have been instrumental in helping us achieve our project milestones efficiently. Highly recommend!",
+    },
+    {
+      name: 'Digital Dynamics Ltd.',
+      role: 'Client',
+      review_rating: 4,
+      review_comment:
+        "Workstellar has been a reliable partner for our software development needs. The developers assigned to us have shown great expertise and professionalism. The only reason for not giving 5 stars is the occasional delay in response times, but overall, we're pleased with their services.",
+    },
+    {
+      name: 'InnovateTech Solutions',
+      role: 'Client',
+      review_rating: 4.5,
+      review_comment:
+        "Workstellar's pool of talent is impressive. We've hired both UX/UI designers and software developers through their platform, and they've all delivered exceptional work. The platform is easy to use, and their customer support is responsive. Definitely recommend Workstellar to other companies looking for skilled resources.",
+    },
+    {
+      name: 'Sarah Johnson',
+      role: 'Software Developer',
+      review_rating: 5,
+      review_comment:
+        "I've been working as a software developer through Workstellar for the past six months, and it's been a fantastic experience. The platform is user-friendly, and the support team is always available to help with any issues. I appreciate the opportunity to work with top-tier clients and collaborate with other talented professionals.",
+    },
+    {
+      name: 'Michael Wong',
+      role: 'UX/UI Designer',
+      review_rating: 4.5,
+      review_comment:
+        "As a UX/UI designer registered with Workstellar, I've had the chance to work on diverse projects with clients from different industries. The platform makes it easy to manage contracts and payments, and the team behind Workstellar is supportive and efficient. Overall, a great platform for freelancers like me to showcase our skills.",
+    },
+  ]
 
   const handlePopup = () => setMPopup(!mPopup)
 
@@ -138,47 +181,50 @@ const CustomerJourney = () => {
             </div>
             <Carousel
               data={testimonials}
-              renderItem={(testimonial, i, isSnapPoint) => (
+              renderItem={(
+                testimonial: {
+                  name: string
+                  review_rating: number
+                  role: string
+                  review_comment: string
+                },
+                i,
+                isSnapPoint
+              ) => (
                 <div
                   key={i}
                   className={`flex-shrink-0 ${
                     isSnapPoint && 'snap-start'
                   } w-full lg:w-1/2 xl:w-1/3 flex flex-col pl-2 pr-2 gap-2`}
                 >
-                  <div className="bg-white p-6 rounded-xl flex flex-col gap-3.5">
+                  <div className="bg-white p-6 h-full rounded-xl flex flex-col gap-3.5">
                     <div className="flex flex-col">
                       <div className="text-sm font-bold text-black">
                         GURANTEEPIVOT
                       </div>
                       <div className="flex flex-row gap-2 items-center">
-                        <div className="text-xs font-bold text-black">4.2</div>
-                        {/* <ReactStars
-                          count={5}
-                          value={4.2}
-                          size={20}
-                          edit={false}
-                        /> */}
+                        <div className="text-xs font-bold mt-0.5 text-black">
+                          {testimonial.review_rating}
+                        </div>
                         <Rating
                           style={{ maxWidth: 100 }}
-                          value={2.1}
+                          value={testimonial.review_rating}
                           readOnly
                         />
                       </div>
                     </div>
                     <div className="text-sm text-grey">
-                      <span className="font-bold text-black">
+                      {/* <span className="font-bold text-black">
                         Dedicated to customer satisfaction{' '}
-                      </span>
-                      They listen, understand our needs, communicate well and
-                      are constantly working to ensure our satisfaction at all
-                      stages of the recruitment process.
+                      </span> */}
+                      {testimonial.review_comment}
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-1">
                       <div className="text-xs font-medium">
-                        Rachel McDermott
+                        {testimonial.name}
                       </div>
                       <div className="text-xs text-grey">
-                        Mechanical Engineering
+                        {testimonial.role}
                       </div>
                     </div>
                   </div>

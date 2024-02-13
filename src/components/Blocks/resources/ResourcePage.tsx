@@ -72,7 +72,7 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
                 </div>
               </div>
               <div className="text-xs md:text-base text-grey">
-                {talent?.user?.city}, {talent?.user?.country}
+                {talent?.user?.city && talent?.user?.city !== 'NA' && `${talent?.user?.city}, `}{talent?.user?.country}
               </div>
             </div>
             <div className="text-sm md:text-base">{talent?.headline}</div>
