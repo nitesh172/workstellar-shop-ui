@@ -6,12 +6,15 @@ import { useCaller } from '@/utils/API'
 import { HttpMethod, TalentProps } from '@/types'
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '@/context/AppContext'
+import { useRouter } from 'next/navigation'
 const LottieAnimation = dynamic(() => import('../LottieAnimation'))
 
 const ResourcePage: React.FC<{ id: string }> = (props) => {
   const { id } = props
 
   const { translate } = useAppContext()
+
+  const router = useRouter()
 
   const [talent, setTalent] = useState<TalentProps | null>(null)
   const [loading, setloading] = useState<boolean>(true)
@@ -35,8 +38,11 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
   }, [id])
   return (
     <div className="">
-      <div className="text-2xl md:text-4xl font-bold mb-11">
-        {translate('_RESOURCES_', 'Resources')}
+      <div className='flex flex-row gap-1 items-center mb-11'>
+        <Image src="/images/arrow-left.svg" alt="" className='cursor-pointer' onClick={() => router.back()} width={32} height={32} />
+        <div className="text-2xl md:text-4xl font-bold">
+          {translate('_RESOURCES_', 'Resources')}
+        </div>
       </div>
       {!!loading && !talent ? (
         <div className="flex flex-col items-center justify-center h-[300px] w-full">
