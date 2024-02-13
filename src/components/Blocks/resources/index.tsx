@@ -1,15 +1,15 @@
 'use client'
-import TextField from '@/components/Input/TextField'
-import { Pagination } from '@/components/Pagination'
-import { useAppContext } from '@/context/AppContext'
-import { usePaginationContext } from '@/context/PaginationContext'
-import { useResourceContext } from '@/context/ResourceContext'
-import { levels, workType } from '@/utils/config'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
+import { levels, workType } from '@/utils/config'
 import React, { useEffect, useState } from 'react'
+import { useAppContext } from '@/context/AppContext'
+import { useResourceContext } from '@/context/ResourceContext'
+import { usePaginationContext } from '@/context/PaginationContext'
+const Pagination = dynamic(() => import('@/components/Pagination'))
 const LottieAnimation = dynamic(() => import('../LottieAnimation'))
+const TextField = dynamic(() => import('@/components/Input/TextField'))
 
 const ResourceMainPage = () => {
   const router = useRouter()
@@ -28,7 +28,6 @@ const ResourceMainPage = () => {
     fetchResources(
       `talents?perPage=${limit}&currentPage=${page}&paymentType=${workFilter}&level=${levelFilter}&searchString=${searchText}&mode=USER_SITE`
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workFilter, levelFilter, limit, page])
 
   useEffect(() => {
@@ -38,7 +37,6 @@ const ResourceMainPage = () => {
       )
       setSearch(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   return (
@@ -132,7 +130,7 @@ const ResourceMainPage = () => {
         </div>
       </div>
       {!!talents && !!talents.length ? (
-        <div className='flex flex-col gap-5'>
+        <div className="flex flex-col gap-5">
           <div className="grid grid-cols-1 min-[425px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-7">
             {talents.map((talent, inx) => (
               <div

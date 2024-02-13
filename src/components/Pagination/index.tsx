@@ -1,12 +1,16 @@
-import { useRef, useState } from 'react'
-import { usePaginationContext } from '@/context/PaginationContext'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+import { useRef, useState } from 'react'
+import { useAppContext } from '@/context/AppContext'
 import { useOnClickOutside } from '@/hooks/useOutsideClick'
-import Button from '../Buttons/Button'
+import { usePaginationContext } from '@/context/PaginationContext'
+const Button = dynamic(() => import('@/components/Buttons/Button'))
 
-export const Pagination = () => {
+const Pagination = () => {
   const { limit, setLimit, page, totalCount, totalPages, setPage } =
     usePaginationContext()
+
+  const { translate } = useAppContext()
 
   const hasPreviousPage = () => {
     return page > 1
@@ -47,12 +51,13 @@ export const Pagination = () => {
       <div className="flex justify-between gap-6 items-center flex-col md:flex-row py-2">
         <div className="flex flex-col md:flex-row gap-6 md:gap-4 items-center">
           <div className={`text-dShadeOne text-sm`}>
-            Showing {limit * (page - 1) + 1} - {calculateLimit()} of{' '}
-            {totalCount} results
+            {translate('_SHOWING_', 'Showing')} {limit * (page - 1) + 1} -{' '}
+            {calculateLimit()} {translate('_OF_', 'of')} {totalCount}{' '}
+            {translate('_RESULTS_', 'results')}
           </div>
           <div className="flex flex-row items-center gap-4">
             <Button
-              text="Previous"
+              text={translate('_PREVIOUS_', 'Previous')}
               onClick={() => hasPreviousPage() && goToPreviousPage()}
               dark
               small
@@ -88,7 +93,7 @@ export const Pagination = () => {
               })}
             </div>
             <Button
-              text="Next"
+              text={translate('_NEXT_', 'Next')}
               dark
               onClick={() => hasNextPage() && goToNextPage()}
               small
@@ -96,7 +101,7 @@ export const Pagination = () => {
           </div>
         </div>
         <div className={`flex items-center gap-2 text-dShadeOne text-sm`}>
-          <span>Items per page</span>{' '}
+          <span>{translate('_ITEM_PER_PAGE_', 'Items per page')}</span>{' '}
           <DropDownWithBorder
             itemsPerPage={limit}
             maxItems={totalCount}
@@ -162,3 +167,5 @@ export const DropDownWithBorder = (props: DropDownWithBorderProps) => {
     </div>
   )
 }
+
+export default Pagination

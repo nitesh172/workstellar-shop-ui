@@ -59,6 +59,8 @@ const Menus = () => {
 
         element.scrollIntoView({ behavior: 'smooth' })
       }, 100)
+    } else {
+      return router.push(menu.url)
     }
   }
 

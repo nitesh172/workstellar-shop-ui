@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
-import Menus from './Menu'
-import Button from '../Buttons/Button'
-import BrandLogo from '../Blocks/BrandLogo'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useAppContext } from '@/context/AppContext'
+const Menus = dynamic(() => import('./Menu'))
+const Button = dynamic(() => import('@/components/Buttons/Button'))
+const BrandLogo = dynamic(() => import('@/components/Blocks/BrandLogo'))
 
 const Footer = () => {
   const router = useRouter()

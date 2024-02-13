@@ -47,7 +47,6 @@ export const AppProvider = (props: AppProviderProps) => {
   const [lang, setLang] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(true)
   const initialized = useRef(false)
-  const [action, setAction] = useState<boolean>(false)
 
   const { execute: fetchHomeResources } = useCaller({
     method: HttpMethod.GET,
@@ -88,7 +87,9 @@ export const AppProvider = (props: AppProviderProps) => {
       (translation: TranslationProps) => translation.key === translationKey
     )
 
-    const translationValue = translation?.translationValues.find((translationValue) => translationValue.language === lang)?.value
+    const translationValue = translation?.translationValues.find(
+      (translationValue) => translationValue.language === lang
+    )?.value
 
     return translationValue || defaultValue
   }
@@ -96,7 +97,6 @@ export const AppProvider = (props: AppProviderProps) => {
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true
-      setAction(true)
       let language = localStorage.getItem('workstellarLanguage')
       if (language) {
         setLang(language)
@@ -109,13 +109,10 @@ export const AppProvider = (props: AppProviderProps) => {
       fetchLanguages('translation/languages/all')
       fetchTranslations('translation')
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     fetchHomeResources('talents?perPage=1000&mode=USER_SITE')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const defaultContext: AppContextType = {

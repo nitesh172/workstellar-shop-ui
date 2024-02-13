@@ -3,7 +3,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { useAppContext } from '@/context/AppContext'
-// import ReactStars from 'react-stars'
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 const Carousel = dynamic(() => import('@/components/Carousel'))
@@ -159,7 +158,11 @@ const CustomerJourney = () => {
                           size={20}
                           edit={false}
                         /> */}
-                        <Rating style={{ maxWidth: 100 }} value={2.1} readOnly />
+                        <Rating
+                          style={{ maxWidth: 100 }}
+                          value={2.1}
+                          readOnly
+                        />
                       </div>
                     </div>
                     <div className="text-sm text-grey">

@@ -1,11 +1,12 @@
 'use client'
-import { useAppContext } from '@/context/AppContext'
-import { HttpMethod, TalentProps } from '@/types'
-import { useCaller } from '@/utils/API'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import toast from 'react-hot-toast'
-import LottieAnimation from '../LottieAnimation'
+import { useCaller } from '@/utils/API'
+import { HttpMethod, TalentProps } from '@/types'
+import React, { useEffect, useState } from 'react'
+import { useAppContext } from '@/context/AppContext'
+const LottieAnimation = dynamic(() => import('../LottieAnimation'))
 
 const ResourcePage: React.FC<{ id: string }> = (props) => {
   const { id } = props
@@ -31,7 +32,6 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
     if (id) {
       fetchResource(`talents/${id}`)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
   return (
     <div className="">
@@ -54,7 +54,7 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
               loading="lazy"
             />
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-1 flex-col gap-4">
             <div className="flex flex-col">
               <div className="flex flex-col md:flex-row gap-2 md:items-center">
                 <div className="text-lg md:text-2xl font-bold mb-1">
@@ -71,7 +71,9 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
             </div>
             <div className="text-sm md:text-base">{talent?.headline}</div>
             <div className="flex flex-col gap-3">
-              <div className="text-sm md:text-base font-medium">{translate('_SKILLS_', 'Skills')}</div>
+              <div className="text-sm md:text-base font-medium">
+                {translate('_SKILLS_', 'Skills')}
+              </div>
               <div className="flex flex-row flex-wrap gap-3">
                 {!!talent?.skills?.length &&
                   talent.skills.map((skills, inx) => (

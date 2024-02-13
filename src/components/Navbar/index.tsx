@@ -1,12 +1,12 @@
 'use client'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import LanguageDropdown from '../LanguageDropdown'
 import { useAppContext } from '@/context/AppContext'
+import { usePathname, useRouter } from 'next/navigation'
 const Button = dynamic(() => import('../Buttons/Button'))
-const BrandLogo = dynamic(() => import('@/components/Blocks/BrandLogo'))
 const Menus = dynamic(() => import('@/components/Blocks/navbar/Menus'))
+const BrandLogo = dynamic(() => import('@/components/Blocks/BrandLogo'))
+const LanguageDropdown = dynamic(() => import('@/components/LanguageDropdown'))
 
 const Navbar = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ const Navbar = () => {
   const { translate } = useAppContext()
 
   const path = usePathname()
-  
+
   const menuList = [
     {
       id: 0,
@@ -89,8 +89,7 @@ const Navbar = () => {
         <BrandLogo />
         <Menus />
         <div className="lg:hidden">
-          <button
-            type="button"
+          <div
             onClick={toggle}
             className={`z-50 hamburger flex rotate-180 flex-col-reverse lg:hidden focus:outline-none ${
               sideBar ? 'open' : ''
@@ -99,10 +98,10 @@ const Navbar = () => {
             <div className="hamburger-top"></div>
             <div className="hamburger-middle"></div>
             <div className="hamburger-bottom"></div>
-          </button>
+          </div>
         </div>
       </div>
-      <div className='flex flex-col-reverse md:flex-row gap-4 items-center self-center'>
+      <div className="flex flex-col-reverse md:flex-row gap-4 items-center self-center">
         <LanguageDropdown />
         <Button
           text={translate('_HIRE_RESOURCE_', 'Hire resource')}
