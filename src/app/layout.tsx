@@ -3,6 +3,9 @@ import { Open_Sans, Pacifico } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { Toaster } from 'react-hot-toast'
+import { AppProvider } from '@/context/AppContext'
+import '@smastrom/react-rating/style.css'
 
 const open_sans = Open_Sans({
   subsets: ['latin'],
@@ -29,11 +32,20 @@ export default function RootLayout({
       <body
         className={`${open_sans.variable} ${pacifico.variable} font-open-sans`}
       >
-        <main className="px-8 md:px-16 lg:px-20 xl:px-24 min-[1920px]:px-80">
-          <Navbar />
-          {children}
-        </main>
-        <Footer />
+        <AppProvider>
+          <div>
+            <main className="px-8 md:px-16 lg:px-20 xl:px-24 min-[1920px]:px-80">
+              <Navbar />
+              {children}
+            </main>
+            <Footer />
+            <Toaster
+              position="bottom-center"
+              reverseOrder={false}
+              toastOptions={{ duration: 3000 }}
+            />
+          </div>
+        </AppProvider>
       </body>
     </html>
   )
