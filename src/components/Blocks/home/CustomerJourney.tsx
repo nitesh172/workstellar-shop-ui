@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { useAppContext } from '@/context/AppContext'
 import { Rating } from '@smastrom/react-rating'
-import '@smastrom/react-rating/style.css'
 const Carousel = dynamic(() => import('@/components/Carousel'))
 const Button = dynamic(() => import('@/components/Buttons/Button'))
 const ScheduleMeeting = dynamic(() => import('../ScheduleMeeting'))
@@ -217,19 +216,8 @@ const CustomerJourney = () => {
                       </div>
                     </div>
                     <div className="text-sm text-grey">
-                      {/* <span className="font-bold text-black">
-                        Dedicated to customer satisfaction{' '}
-                      </span> */}
                       {testimonial.review_comment}
                     </div>
-                    {/* <div className="flex flex-col gap-1">
-                      <div className="text-xs font-medium">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-xs text-grey">
-                        {testimonial.role}
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               )}

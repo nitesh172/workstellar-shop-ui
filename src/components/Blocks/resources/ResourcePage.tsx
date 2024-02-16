@@ -38,8 +38,15 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
   }, [id])
   return (
     <div className="">
-      <div className='flex flex-row gap-1 items-center mb-11'>
-        <Image src="/images/arrow-left.svg" alt="" className='cursor-pointer' onClick={() => router.back()} width={32} height={32} />
+      <div className="flex flex-row gap-1 items-center mb-11">
+        <Image
+          src="/images/arrow-left.svg"
+          alt=""
+          className="cursor-pointer"
+          onClick={() => router.back()}
+          width={32}
+          height={32}
+        />
         <div className="text-2xl md:text-4xl font-bold">
           {translate('_RESOURCES_', 'Resources')}
         </div>
@@ -72,7 +79,10 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
                 </div>
               </div>
               <div className="text-xs md:text-base text-grey">
-                {talent?.user?.city && talent?.user?.city !== 'NA' && `${talent?.user?.city}, `}{talent?.user?.country}
+                {talent?.user?.city &&
+                  talent?.user?.city !== 'NA' &&
+                  `${talent?.user?.city}, `}
+                {talent?.user?.country}
               </div>
             </div>
             <div className="text-sm md:text-base">{talent?.headline}</div>
@@ -80,14 +90,22 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
               <div className="text-sm md:text-base font-medium">
                 {translate('_SKILLS_', 'Skills')}
               </div>
-              <div className="flex flex-row flex-wrap gap-3">
+              <div className="flex flex-row flex-wrap gap-x-10 gap-y-4 w-full">
                 {!!talent?.skills?.length &&
-                  talent.skills.map((skills, inx) => (
-                    <div
-                      key={`skills-${inx}`}
-                      className="bg-chipColor text-xs ms:text-sm rounded-[32px] p-5 py-2.5"
-                    >
-                      {skills.name}
+                  talent.skills.map((skill, inx) => (
+                    <div key={inx} className="flex flex-col gap-1">
+                      <div className="text-sm ms:text-base">{skill.name}</div>
+                      <div className="flex flex-row gap-2 items-center">
+                        <div className="w-[200px] h-2.5 bg-[#F6F6F8]">
+                          <div
+                            className={`h-full bg-[#6EA6E8]`}
+                            style={{ width: skill.rating * 20 }}
+                          ></div>
+                        </div>
+                        <div className="text-sm ms:text-base">
+                          {skill.rating}
+                        </div>
+                      </div>
                     </div>
                   ))}
               </div>

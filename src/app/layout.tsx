@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Toaster } from 'react-hot-toast'
 import { AppProvider } from '@/context/AppContext'
+import '@smastrom/react-rating/style.css'
 
 const open_sans = Open_Sans({
   subsets: ['latin'],

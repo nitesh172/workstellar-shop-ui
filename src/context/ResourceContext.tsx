@@ -1,7 +1,7 @@
 'use client'
-import { HttpMethod, TalentProps, TalentResponseProps } from '@/types'
+import { HttpMethod, SkillProps, TalentProps, TalentResponseProps } from '@/types'
 import { useCaller } from '@/utils/API'
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { usePaginationContext } from './PaginationContext'
 
@@ -9,6 +9,8 @@ export type ResourceContextType = {
   talents: TalentProps[]
   loading: boolean
   fetchResources: Function
+  skills: SkillProps[]
+  designations: String[]
 }
 
 const ResourceContext: any = createContext<ResourceContextType>(
@@ -26,6 +28,8 @@ export const ResourceProvider = (props: ResourceProviderProps) => {
   const { children } = props
 
   const [talents, setTalents] = useState<TalentProps[]>([])
+  const [skills, setSkills] = useState<SkillProps[]>([])
+  const [designations, setDesignations] = useState<String[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
   const { setTotalCount, setTotalPages, setPage, setLimit, setIsLoading } =
@@ -48,10 +52,39 @@ export const ResourceProvider = (props: ResourceProviderProps) => {
     },
   })
 
+  const { execute: fetchDesignations } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: String[]) => {
+      if (!resp) return
+      setDesignations(resp)
+    },
+    errorCb: (failed: any) => {
+      toast.error(failed)
+    },
+  })
+
+  const { execute: fetchSkills } = useCaller({
+    method: HttpMethod.GET,
+    doneCb: (resp: SkillProps[]) => {
+      if (!resp) return
+      setSkills(resp)
+    },
+    errorCb: (failed: any) => {
+      toast.error(failed)
+    },
+  })
+
+  useEffect(() => {
+    fetchSkills('talents/skills')
+    fetchDesignations('talents/designations')
+  }, [])
+
   const defaultContext: ResourceContextType = {
     ...props,
     talents,
     loading,
+    skills,
+    designations,
     fetchResources
   }
 

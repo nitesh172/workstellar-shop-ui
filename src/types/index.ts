@@ -125,9 +125,10 @@ export type TalentProps = {
   id: string
   createdAt: string
   updatedAt: string
-  skills: { name: string }[]
+  skills: { name: string; rating: number; id: string }[]
   amount: {}
   paymentType: string
+  rating: number
   headline: string
   experienceYear: number
   designation: string
@@ -168,4 +169,10 @@ export type LanguagesResponseProps = LanguageProps[]
 export enum Order {
   DESC = 'DESC',
   ASC = 'ASC',
+}
+
+export type SkillProps = {
+  id: string,
+  name: string,
+  rating: string
 }
