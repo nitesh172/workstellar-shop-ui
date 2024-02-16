@@ -16,8 +16,8 @@ const TextField = dynamic(() => import('@/components/Input/TextField'))
 const ResourceMainPage = () => {
   const router = useRouter()
   const { translate } = useAppContext()
-  const { fetchResources, talents, loading, skills, designations } = useResourceContext()
-  const [filter, setFilter] = useState<boolean>(false)
+  const { fetchResources, talents, loading, skills, designations } =
+    useResourceContext()
 
   const [workFilter, setWorkFilter] = useState<string>('')
   const [levelFilter, setLevelFilter] = useState<string>('')
@@ -44,7 +44,7 @@ const ResourceMainPage = () => {
   }, [search])
 
   return (
-    <div>
+    <div id='talentPage'>
       <div className="text-2xl md:text-4xl font-bold mb-11">
         {translate('_RESOURCES_', 'Resources')}
       </div>
@@ -95,15 +95,17 @@ const ResourceMainPage = () => {
             className="w-full md:w-[200px]"
             label={translate('_DESIGNATION_', 'Designation')}
             availableOptions={designations.map((designation) => {
-              return {name: designation}
+              return { name: designation }
             })}
             selectOptionKey="name"
             setOption={(e: any) => {
               setDesignationFilter(e.target.value)
             }}
-            option={designations.map((designation) => {
-              return {name: designation}
-            }).find((type) => type.name === designationFilter)}
+            option={designations
+              .map((designation) => {
+                return { name: designation }
+              })
+              .find((type) => type.name === designationFilter)}
           />
           <DropDown
             availableOptionKey="name"
@@ -118,61 +120,6 @@ const ResourceMainPage = () => {
             option={skills.find((type) => type.name === skillFilter)}
           />
         </div>
-        {/* <div
-          onClick={(e) => e.stopPropagation()}
-          className={`${
-            filter ? 'flex' : 'hidden'
-          } flex absolute shadow-lg xl:shadow-none top-16 md:top-[90px] transition-all ease-in-out duration-300 -right-2 min-[425px]:right-0 p-6 min-[425px]:p-8 z-10 rounded-2xl xl:rounded-none border xl:border-none xl:p-0 bg-white xl:static flex-col xl:flex-row gap-10 xl:items-center xl:flex`}
-        >
-          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
-            <div className="text-sm text-grey">
-              {translate('_WORK_TYPE_', 'Work type')}
-            </div>
-            <div className="flex flex-row gap-2.5 items-center">
-              {workType.map((type, inx) => (
-                <div
-                  key={inx}
-                  onClick={() =>
-                    workFilter === type.value
-                      ? setWorkFilter('')
-                      : setWorkFilter(type.value)
-                  }
-                  className={`rounded-3xl cursor-pointer border text-sm border-black hover:bg-black hover:text-white py-2 px-4 ${
-                    workFilter === type.value
-                      ? 'bg-black text-white'
-                      : 'bg-transparent'
-                  }`}
-                >
-                  {translate(type.key, type.name)}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col xl:flex-row gap-2.5 xl:items-center">
-            <div className="text-sm text-grey">
-              {translate('_LEVEL_', 'Level')}
-            </div>
-            <div className="flex flex-row gap-2.5 items-center">
-              {levels.map((level, index) => (
-                <div
-                  key={index}
-                  onClick={() =>
-                    levelFilter === level.value
-                      ? setLevelFilter('')
-                      : setLevelFilter(level.value)
-                  }
-                  className={`rounded-3xl cursor-pointer border text-sm border-black hover:bg-black hover:text-white py-2 px-4 ${
-                    levelFilter === level.value
-                      ? 'bg-black text-white'
-                      : 'bg-transparent'
-                  }`}
-                >
-                  {translate(level.key, level.name)}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
       </div>
       {!!talents && !!talents.length ? (
         <div className="flex flex-col gap-5">
@@ -214,7 +161,11 @@ const ResourceMainPage = () => {
                         height={24}
                       />
                     </div>
-                    <Rating style={{ maxWidth: 100 }} value={talent.rating} />
+                    <Rating
+                      style={{ maxWidth: 100 }}
+                      readOnly
+                      value={Number(talent.rating)}
+                    />
                   </div>
                 </div>
               )

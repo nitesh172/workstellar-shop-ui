@@ -43,7 +43,16 @@ const ResourcePage: React.FC<{ id: string }> = (props) => {
           src="/images/arrow-left.svg"
           alt=""
           className="cursor-pointer"
-          onClick={() => router.back()}
+          onClick={() => {
+            router.back()
+            return setTimeout(() => {
+              let element = document.getElementById('talentPage')
+
+              if (!element) return
+
+              element.scrollIntoView({ behavior: 'smooth' })
+            }, 100)
+          }}
           width={32}
           height={32}
         />

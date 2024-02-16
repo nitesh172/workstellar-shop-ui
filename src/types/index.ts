@@ -128,7 +128,7 @@ export type TalentProps = {
   skills: { name: string; rating: number; id: string }[]
   amount: {}
   paymentType: string
-  rating: number
+  rating: string
   headline: string
   experienceYear: number
   designation: string
